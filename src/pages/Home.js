@@ -20,11 +20,24 @@ import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+import logo from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-        padding: 30,
     },
+    banner: {
+        padding: 0,
+        margin: 0,
+    },
+    bannerImg: {
+        width: "100%",
+        margin: "0",
+        padding: "0",
+    },
+    searchBar: {
+        width: "60em",
+    }
 }));
 
 export default function Header() {
@@ -32,9 +45,13 @@ export default function Header() {
 
     return (
         <Paper className={classes.root}>
+            <div className={classes.banner}>
+                <img className={classes.bannerImg} src={logo} />
+            </div>
             <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                <InputLabel htmlFor="standard-adornment-password">Search...</InputLabel>
                 <Input
+                    className={classes.searchBar}
                     id="standard-adornment-password"
                     endAdornment={
                         <InputAdornment position="end">

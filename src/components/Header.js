@@ -11,7 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
 
-import logo from './assets/img/Logo2.png';
+import logo from './assets/img/Logo.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
