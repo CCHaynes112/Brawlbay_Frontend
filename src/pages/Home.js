@@ -7,9 +7,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-
-
-import clsx from 'clsx';
 import Input from '@material-ui/core/Input';
 import FilledInput from '@material-ui/core/FilledInput';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -20,50 +17,59 @@ import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+import TopEight from '../components/TopEight';
+
 import logo from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
 
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
-    banner: {
-        padding: 0,
-        margin: 0,
+    paper: {
+        marginTop: 20,
+        marginBottom: 20,
     },
     bannerImg: {
         width: "100%",
-        margin: "0",
-        padding: "0",
+    },
+    searchContainer: {
+        //marginTop: -100,
+        textAlign: "center",
     },
     searchBar: {
-        width: "60em",
-    }
+        width: "60%",
+    },
 }));
 
-export default function Header() {
+export default function Home() {
     const classes = useStyles();
 
     return (
-        <Paper className={classes.root}>
-            <div className={classes.banner}>
-                <img className={classes.bannerImg} src={logo} />
-            </div>
-            <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="standard-adornment-password">Search...</InputLabel>
-                <Input
-                    className={classes.searchBar}
-                    id="standard-adornment-password"
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                            >
-                                <SearchIcon />
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                />
-            </FormControl>
-        </Paper>
+        <div className={classes.root}>
+            <Paper className={classes.paper}>
+                <div>
+                    <img className={classes.bannerImg} src={logo} />
+                    <div className={classes.searchContainer}>
+                        <FormControl className={classes.searchBar}>
+                            <InputLabel htmlFor="player-search">
+                                Search...
+                    </InputLabel>
+                            <Input
+                                id="player-search"
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl>
+                    </div>
+                </div>
+            </Paper>
+
+            <Paper className={classes.paper}>
+                <TopEight />
+            </Paper>
+        </div>
     );
 }
