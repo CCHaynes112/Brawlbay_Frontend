@@ -18,32 +18,36 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Grid from '@material-ui/core/Grid';
 
-import TopEight from '../components/TopEight';
+import RankedInfo from '../components/RankedInfo';
 
-import bannerImg from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
+import rankImg from '../components/assets/img/Rankings/Diamond.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         marginTop: 100,
+        padding: 3,
     },
-    paper: {
-        width: 400,
+    titlePaper: {
+        width: 600,
         padding: 20,
         textAlign: "center",
         marginBottom: 30,
         margin: "auto",
     },
     container: {
-        
+
     },
-    leftColumn: {
-        margin: "auto",
-        backgroundColor: "orange",
+    column: {
+
     },
-    rightColumn: {
+    paper: {
+        padding: 20,
         margin: "auto",
-        backgroundColor: "green",
+        marginTop: 10,
+        textAlign: "center",
+        width: "97%",
+        backgroundColor: "#fcfcfc",
     },
 }));
 
@@ -52,25 +56,46 @@ export default function Home() {
 
     return (
         <div className={classes.root}>
-            <Grid>
-                <Paper className={classes.paper}>
-                    <Typography variant="h4">UserName</Typography>
-                    <Typography variant="p">ID: 18764</Typography>
+            <Grid container item md={12}>
+                <Paper className={classes.titlePaper}>
+                    <Typography variant="h3">UserName</Typography>
+                    <Typography variant="h6">ID: 18764</Typography>
                 </Paper>
             </Grid>
-            <Grid container spacing={1} className={classes.container}>
-                <Grid item container xs={6} spacing={3} className={classes.leftColumn}>
+
+            <Grid container className={classes.container}>
+
+                <Grid item container md={6} className={classes.column}>
                     <Paper className={classes.paper}>
-                        <Typography variant="h4">UserName</Typography>
-                        <Typography variant="p">ID: 18764</Typography>
+                        <Typography variant="h4">Overview</Typography>
+                        <Typography variant="h6">Level: 100</Typography>
+                    </Paper>
+
+                    <Paper className={classes.paper}>
+                        <RankedInfo
+                            type="1v1"
+                            rankedImg={rankImg}
+                            region="US-E"
+                            rank="Diamond"
+                            peakRating="2049"
+                            currentRating="2031"
+                            games="904"
+                            wins="300"
+                            losses="788"
+                        />
+                    </Paper>
+
+                    <Paper className={classes.paper}>
+                        <Typography variant="h4">Current Season</Typography>
+                        <Typography variant="h6">2v2</Typography>
                     </Paper>
                 </Grid>
-                <Grid item container xs={6} spacing={3} className={classes.rightColumn}>
+                <Grid item container md={6} className={classes.column}>
                     <Paper className={classes.paper}>
-                        <Typography variant="h4">UserName</Typography>
-                        <Typography variant="p">ID: 18764</Typography>
+                        <Typography variant="h4">Most Played Legends</Typography>
                     </Paper>
                 </Grid>
+
             </Grid>
         </div>
     );
