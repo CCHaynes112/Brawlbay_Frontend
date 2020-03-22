@@ -6,18 +6,17 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
+import MoreIcon from '@material-ui/icons/MoreVert';
 
 import logo from './assets/img/Logo.png';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        marginBottom: theme.spacing(12),
-    },
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -62,35 +61,102 @@ const useStyles = makeStyles(theme => ({
             },
         },
     },
+    desktopView: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        },
+    },
+    mobileView: {
+        display: 'flex',
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+    },
 }));
 
 export default function Header() {
     const classes = useStyles();
 
+    //The anchor object where the menu will spawn
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleMobileMenuOpen = event => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
+
+    const renderMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem>
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon />
+                    </div>
+                    <InputBase
+                        placeholder="Search…"
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        inputProps={{ 'aria-label': 'search' }}
+                    />
+                </div>
+            </MenuItem>
+            <MenuItem>
+                <Button color="inherit" href="/">Home</Button>
+            </MenuItem>
+            <MenuItem>
+                <Button color="inherit" target="_blank" href="https://www.brawlhalla.com/rankings/1v1/">Leaderboards</Button>
+            </MenuItem>
+        </Menu>
+    );
+
     return (
-        <div className={classes.root}>
+        <div>
             <AppBar position="fixed">
                 <Toolbar>
                     <div className={classes.title}>
                         <a href="/"><img src={logo} alt="Logo" /></a>
                     </div>
-                    <Button color="inherit" href="/">Home</Button>
-                    <Button color="inherit" target="_blank" href="https://www.brawlhalla.com/rankings/1v1/">Leaderboards</Button>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
+
+                    <div className={classes.desktopView}>
+                        <Button color="inherit" href="/">Home</Button>
+                        <Button color="inherit" target="_blank" href="https://www.brawlhalla.com/rankings/1v1/">Leaderboards</Button>
+                        <div className={classes.search}>
+                            <div className={classes.searchIcon}>
+                                <SearchIcon />
+                            </div>
+                            <InputBase
+                                placeholder="Search…"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                            />
                         </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
+                    </div>
+
+                    <div className={classes.mobileView}>
+                        <IconButton color="inherit" onClick={handleMobileMenuOpen}>
+                            <MoreIcon />
+                        </IconButton>
                     </div>
                 </Toolbar>
             </AppBar>
+            {renderMenu}
         </div>
     );
 }

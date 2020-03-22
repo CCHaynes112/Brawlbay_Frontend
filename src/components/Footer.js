@@ -42,7 +42,7 @@ export default function Header() {
                 <Grid container spacing={1}>
                     <Grid item>
                         <IconButton href="http://CurtisHaynes.net" className={classes.socials}>
-                            <Typography>Designed & Developed by Curtis Haynes</Typography>
+                            <Typography>Developed by Curtis Haynes</Typography>
                         </IconButton>
                     </Grid>
                     <Grid item>

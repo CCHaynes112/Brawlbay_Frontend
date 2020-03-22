@@ -24,11 +24,12 @@ import bannerImg from '../components/assets/img/Brawlbay_Banner_Gradient_lighter
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+        marginTop: 100,
     },
     paper: {
         marginTop: 20,
         marginBottom: 20,
-        backgroundColor: "#fdfdfd",
+        backgroundColor: "#fcfcfc",
     },
     banner: {
         width: "100%",
@@ -56,13 +57,13 @@ export default function Home() {
                         <InputLabel htmlFor="player-search">
                             Search...
                         </InputLabel>
-                        <Input
-                            id="player-search"
-                            endAdornment={
-                                <InputAdornment position="end">
+                        <Input endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton>
                                     <SearchIcon />
-                                </InputAdornment>
-                            }
+                                </IconButton>
+                            </InputAdornment>
+                        }
                         />
                     </FormControl>
                 </div>

@@ -15,6 +15,7 @@ import theme from './theme';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import Result from './pages/Result';
 
 export default function App() {
   return (
@@ -24,8 +25,11 @@ export default function App() {
         <Header />
         <Container>
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
+            </Route>
+            <Route path="/result">
+              <Result />
             </Route>
           </Switch>
         </Container>

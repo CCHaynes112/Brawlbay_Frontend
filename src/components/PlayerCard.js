@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        // margin: 1,
+        //margin: 1,
     },
     card: {
         width: 200,
@@ -43,7 +43,7 @@ export default function PlayerCard(props) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" href="/result">
                         View Stats
                     </Button>
                 </CardActions>
