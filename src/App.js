@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 
 import theme from './theme';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
             </Route>
           </Switch>
         </Container>
+        <Footer />
       </ThemeProvider>
     </Router>
   );

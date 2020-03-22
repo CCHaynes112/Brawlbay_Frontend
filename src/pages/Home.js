@@ -19,7 +19,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import TopEight from '../components/TopEight';
 
-import logo from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
+import bannerImg from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,15 +28,19 @@ const useStyles = makeStyles(theme => ({
     paper: {
         marginTop: 20,
         marginBottom: 20,
+        backgroundColor: "#fdfdfd",
     },
-    bannerImg: {
+    banner: {
         width: "100%",
-    },
-    searchContainer: {
-        //marginTop: -100,
+        height: 400,
         textAlign: "center",
+        backgroundImage: "url(" + bannerImg + ")",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
     },
     searchBar: {
+        marginTop: 300,
         width: "60%",
     },
 }));
@@ -47,23 +51,20 @@ export default function Home() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <div>
-                    <img className={classes.bannerImg} src={logo} />
-                    <div className={classes.searchContainer}>
-                        <FormControl className={classes.searchBar}>
-                            <InputLabel htmlFor="player-search">
-                                Search...
-                    </InputLabel>
-                            <Input
-                                id="player-search"
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <SearchIcon />
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
-                    </div>
+                <div className={classes.banner}>
+                    <FormControl className={classes.searchBar}>
+                        <InputLabel htmlFor="player-search">
+                            Search...
+                        </InputLabel>
+                        <Input
+                            id="player-search"
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                 </div>
             </Paper>
 
