@@ -19,6 +19,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Grid from '@material-ui/core/Grid';
 
 import RankedInfo from '../components/RankedInfo';
+import PieChart from '../components/charts/PieChart';
 
 import rankImg from '../components/assets/img/Rankings/Diamond.png';
 
@@ -69,6 +70,7 @@ export default function Home() {
                     <Paper className={classes.paper}>
                         <Typography variant="h4">Overview</Typography>
                         <Typography variant="h6">Level: 100</Typography>
+                        <PieChart width="400" height="400" />
                     </Paper>
 
                     <Paper className={classes.paper}>
