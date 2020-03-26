@@ -1,18 +1,9 @@
 import React from 'react';
 
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-
-    },
-}));
-
-export default function PieChart(props) {
-    const classes = useStyles();
+export default function DoughnutChart(props) {
 
     const data = {
         labels: [
@@ -39,7 +30,7 @@ export default function PieChart(props) {
     return (
         <div>
             <h2>{props.title}</h2>
-            <Pie data={data} />
+            <Doughnut data={data} />
         </div>
     );
 }

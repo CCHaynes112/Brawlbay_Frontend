@@ -1,25 +1,12 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Input from '@material-ui/core/Input';
-import FilledInput from '@material-ui/core/FilledInput';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Grid from '@material-ui/core/Grid';
 
 import RankedInfo from '../components/RankedInfo';
-import PieChart from '../components/charts/PieChart';
+import DoughnutChart from '../components/charts/DoughnutChart';
+import BarChart from '../components/charts/BarChart';
 
 import rankImg from '../components/assets/img/Rankings/Diamond.png';
 
@@ -59,7 +46,7 @@ export default function Home() {
         <div className={classes.root}>
             <Grid container item md={12}>
                 <Paper className={classes.titlePaper}>
-                    <Typography variant="h3">UserName</Typography>
+                    <Typography variant="h2">UserName</Typography>
                     <Typography variant="h6">ID: 18764</Typography>
                 </Paper>
             </Grid>
@@ -68,9 +55,9 @@ export default function Home() {
 
                 <Grid item container md={6} className={classes.column}>
                     <Paper className={classes.paper}>
-                        <Typography variant="h4">Overview</Typography>
+                        <Typography variant="h3">Overview</Typography>
                         <Typography variant="h6">Level: 100</Typography>
-                        <PieChart width="400" height="400" />
+                        <DoughnutChart width="400" height="400" title="Win/Loss" label1="Wins" label2="Losses" value1="50" value2="25" />
                     </Paper>
 
                     <Paper className={classes.paper}>
@@ -88,13 +75,17 @@ export default function Home() {
                     </Paper>
 
                     <Paper className={classes.paper}>
-                        <Typography variant="h4">Current Season</Typography>
+                        <Typography variant="h3">Current Season</Typography>
                         <Typography variant="h6">2v2</Typography>
                     </Paper>
                 </Grid>
                 <Grid item container md={6} className={classes.column}>
                     <Paper className={classes.paper}>
-                        <Typography variant="h4">Most Played Legends</Typography>
+                        <Typography variant="h3">Most Played Legends</Typography>
+                        <DoughnutChart width="400" height="400" title="Win/Loss" label1="Wins" label2="Losses" value1="50" value2="25" />
+
+                        <BarChart title="Damage Breakdown" label1="Damage Given" label2="Damage Taken" value1="40" value2="200" />
+
                     </Paper>
                 </Grid>
 

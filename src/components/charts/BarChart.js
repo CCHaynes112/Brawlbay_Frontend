@@ -1,18 +1,9 @@
 import React from 'react';
 
-import { Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-
-    },
-}));
-
-export default function PieChart(props) {
-    const classes = useStyles();
+export default function BarChart(props) {
 
     const data = {
         labels: [
@@ -20,7 +11,7 @@ export default function PieChart(props) {
             props.label2,
         ],
         datasets: [{
-            data: [props.value1, props.value2],
+            data: [[0, props.value1], [0, props.value2],],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.4)',
                 'rgba(255,99,132, 0.4)'
@@ -36,10 +27,17 @@ export default function PieChart(props) {
         }]
     };
 
+    const options = {
+        legend: {
+            display: false
+        },
+        
+    }
+
     return (
         <div>
             <h2>{props.title}</h2>
-            <Pie data={data} />
+            <Bar data={data} options={options} />
         </div>
     );
 }
