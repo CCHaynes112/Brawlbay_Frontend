@@ -38,7 +38,7 @@ export default function RankedInfo(props) {
 
     const rank2v2 = (
         <div>
-            
+            RANKED 2V2 INFO
         </div>
     )
 
@@ -52,7 +52,7 @@ export default function RankedInfo(props) {
 
     return (
         <div className={classes.root}>
-            <Typography variant="h4">Current Season</Typography>
+            <Typography variant="h3">Current Season</Typography>
             <Typography variant="h6">{props.type}</Typography>
             {rankedContent}
         </div>

@@ -5,8 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 import RankedInfo from '../components/RankedInfo';
+import LegendStats from '../components/LegendStats';
 import DoughnutChart from '../components/charts/DoughnutChart';
 import BarChart from '../components/charts/BarChart';
+import PieChart from '../components/charts/PieChart';
 
 import rankImg from '../components/assets/img/Rankings/Diamond.png';
 
@@ -57,7 +59,19 @@ export default function Home() {
                     <Paper className={classes.paper}>
                         <Typography variant="h3">Overview</Typography>
                         <Typography variant="h6">Level: 100</Typography>
-                        <DoughnutChart width="400" height="400" title="Win/Loss" label1="Wins" label2="Losses" value1="50" value2="25" />
+                        <DoughnutChart
+                            width="400"
+                            height="400"
+                            title="Win/Loss"
+                            labels={[
+                                "Wins",
+                                "Losses",
+                            ]}
+                            values={[
+                                33,
+                                59
+                            ]}
+                        />
                     </Paper>
 
                     <Paper className={classes.paper}>
@@ -75,17 +89,68 @@ export default function Home() {
                     </Paper>
 
                     <Paper className={classes.paper}>
-                        <Typography variant="h3">Current Season</Typography>
-                        <Typography variant="h6">2v2</Typography>
+                        <RankedInfo
+                            type="2v2"
+                            rankedImg={rankImg}
+                            region="US-E"
+                            rank="Platinum"
+                            peakRating="1945"
+                            currentRating="1901"
+                            games="354"
+                            wins="111"
+                            losses="213"
+                        />
                     </Paper>
                 </Grid>
                 <Grid item container md={6} className={classes.column}>
                     <Paper className={classes.paper}>
                         <Typography variant="h3">Most Played Legends</Typography>
-                        <DoughnutChart width="400" height="400" title="Win/Loss" label1="Wins" label2="Losses" value1="50" value2="25" />
+                        <DoughnutChart
+                            width="400"
+                            height="400"
+                            title="Win/Loss"
+                            labels={[
+                                "Wins",
+                                "Losses",
+                            ]}
+                            values={[
+                                93,
+                                11
+                            ]}
+                        />
 
-                        <BarChart title="Damage Breakdown" label1="Damage Given" label2="Damage Taken" value1="40" value2="200" />
+                        <BarChart
+                            title="Damage Breakdown"
+                            labels={[
+                                "Damage Given",
+                                "Damage Taken"
+                            ]}
+                            values={[
+                                [0, 40],
+                                [0, 200]
+                            ]}
+                        />
 
+                        <PieChart
+                            title="Damage Breakdown"
+                            labels={[
+                                "Axe",
+                                "Katar",
+                                "Gadget",
+                                "Unarmed",
+                                "Thrown",
+                            ]}
+                            values={[
+                                170,
+                                200,
+                                13,
+                                99,
+                                5
+                            ]}
+                        />
+                    </Paper>
+                    <Paper className={classes.paper}>
+                        <LegendStats />
                     </Paper>
                 </Grid>
 
