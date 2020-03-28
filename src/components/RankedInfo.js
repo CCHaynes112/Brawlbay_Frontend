@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
 
+import RankedTeam from '../components/RankedTeam';
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,11 +36,13 @@ export default function RankedInfo(props) {
             <Typography variant="body1">Losses: {props.losses}</Typography>
         </div>
     )
-
+    
     const rank2v2 = (
-        <div>
-            RANKED 2V2 INFO
-        </div>
+        props.teams.map((team) =>
+            <Paper>
+                <RankedTeam team={team} />
+            </Paper>
+        )
     )
 
     let rankedContent;

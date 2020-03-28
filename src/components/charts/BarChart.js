@@ -35,6 +35,11 @@ export default function BarChart(props) {
         legend: {
             display: false
         },
+        scales: {
+            xAxes: [{
+                display: false
+            }]
+        },
         
     }
 

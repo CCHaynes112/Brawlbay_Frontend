@@ -41,8 +41,31 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Home() {
+export default function Result() {
     const classes = useStyles();
+
+    const teamList = [
+        {
+            rankedImg: { rankImg },
+            region: "US-W",
+            rank: "Gold",
+            peakRating: "1000",
+            currentRating: "999",
+            games: "5",
+            wins: "3",
+            losses: "2",
+        },
+        {
+            rankedImg: { rankImg },
+            region: "US-E",
+            rank: "Platinum",
+            peakRating: "1945",
+            currentRating: "1901",
+            games: "354",
+            wins: "111",
+            losses: "213",
+        },
+    ];
 
     return (
         <div className={classes.root}>
@@ -91,14 +114,7 @@ export default function Home() {
                     <Paper className={classes.paper}>
                         <RankedInfo
                             type="2v2"
-                            rankedImg={rankImg}
-                            region="US-E"
-                            rank="Platinum"
-                            peakRating="1945"
-                            currentRating="1901"
-                            games="354"
-                            wins="111"
-                            losses="213"
+                            teams={teamList}
                         />
                     </Paper>
                 </Grid>

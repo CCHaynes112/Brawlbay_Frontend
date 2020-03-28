@@ -31,10 +31,16 @@ export default function PieChart(props) {
         }]
     };
 
+    const options = {
+        legend: {
+            display: false
+        }
+    };
+
     return (
         <div>
             <h2>{props.title}</h2>
-            <Pie data={data} />
+            <Pie data={data} options={options} />
         </div>
     );
 }

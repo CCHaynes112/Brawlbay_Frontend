@@ -31,10 +31,16 @@ export default function DoughnutChart(props) {
         }]
     };
 
+    const options = {
+        legend: {
+            display: false
+        }
+    };
+
     return (
         <div>
             <h2>{props.title}</h2>
-            <Doughnut data={data} />
+            <Doughnut data={data} options={options} />
         </div>
     );
 }

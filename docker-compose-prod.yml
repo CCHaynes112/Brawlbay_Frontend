@@ -1,7 +1,7 @@
 version: "3.7"
 services:
-    react-prod:
-        container_name: react-prod
+    brawlbay-prod:
+        container_name: brawlbay-prod
         build: 
             context: .
             dockerfile: Dockerfile-prod
