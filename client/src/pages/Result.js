@@ -21,10 +21,6 @@ const useStyles = makeStyles(theme => ({
         marginTop: 70,
         padding: 3,
     },
-    titlePaper: {
-        width: 600,
-        marginBottom: 30,
-    },
     paper: {
         padding: 20,
         margin: "auto",
@@ -70,7 +66,7 @@ export default function Result() {
     return (
         <div className={classes.root}>
             <Grid container item xs={12}>
-                <Paper className={classes.titlePaper, classes.paper}>
+                <Paper className={classes.paper}>
                     <Typography variant={heading1}>UserName</Typography>
                     <Typography variant={subHeading}>ID: 18764</Typography>
                 </Paper>

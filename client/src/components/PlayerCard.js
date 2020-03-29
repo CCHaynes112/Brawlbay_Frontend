@@ -29,23 +29,25 @@ export default function PlayerCard(props) {
 
     return (
         <Grid item md={3} className={classes.root}>
-            <Card elevation={2} className={classes.card}>
-                <CardActionArea>
-                    <Link href="/result">
+            <Link href="/result" underline="none">
+                <Card elevation={2} className={classes.card}>
+                    <CardActionArea>
+
                         <CardMedia
                             className={classes.media}
                             image={props.legendImg}
                             title="LegendImg"
                         />
-                    </Link>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">Boomie</Typography>
-                        <Typography variant="body2" component="p">Rating: 2906</Typography>
-                        <Typography variant="body2" component="p">US-E</Typography>
-                        <Typography variant="body2" component="p">Wins: 485</Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">Boomie</Typography>
+                            <Typography variant="body2" component="p">Rating: 2906</Typography>
+                            <Typography variant="body2" component="p">US-E</Typography>
+                            <Typography variant="body2" component="p">Wins: 485</Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Link>
         </Grid>
     );
 }
