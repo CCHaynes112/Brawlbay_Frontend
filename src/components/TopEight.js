@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 
 import PlayerCard from './PlayerCard';
 
-import top8Img from './assets/img/TopPlayers.png'
+import top8Img from './assets/img/TopEight.jpg'
 
 import legend44Img from './assets/img/legend_art/44.png';
 import legend5Img from './assets/img/legend_art/5.png';

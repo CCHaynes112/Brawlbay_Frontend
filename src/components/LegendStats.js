@@ -26,6 +26,12 @@ const useStyles = makeStyles(theme => ({
     },
     box: {
         marginTop: 20,
+    },
+    chartBox: {
+        width: "100%",
+    },
+    grid: {
+        margin: "auto",
     }
 }));
 
@@ -35,14 +41,18 @@ export default function LegendStats(props) {
     return (
         <div className={classes.root}>
             <Box className={classes.box}>
-                <Button variant="contained" color="secondary">
+                <Button variant="outlined" color="primary">
                     Legends
                     <ExpandMore />
                 </Button>
             </Box>
-            <Grid className={classes.box}>
-                <LegendCard legendImg={legend44Img} />
-                <ChartCard />
+            <Grid container className={classes.box}>
+                <Grid lg={5} item className={classes.grid} >
+                    <LegendCard legendImg={legend44Img} />
+                </Grid>
+                <Grid lg={7} item className={classes.grid} >
+                    <ChartCard />
+                </Grid>
             </Grid>
         </div>
     );

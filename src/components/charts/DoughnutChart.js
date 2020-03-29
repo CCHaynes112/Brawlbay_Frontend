@@ -1,4 +1,7 @@
 import React from 'react';
+
+import Box from '@material-ui/core/Box';
+
 import { Doughnut } from 'react-chartjs-2';
 
 
@@ -38,9 +41,9 @@ export default function DoughnutChart(props) {
     };
 
     return (
-        <div>
+        <Box>
             <h2>{props.title}</h2>
             <Doughnut data={data} options={options} />
-        </div>
+        </Box>
     );
 }

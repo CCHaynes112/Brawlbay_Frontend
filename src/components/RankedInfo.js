@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
     rankedTeams: {
         overflowY: "scroll",
-        height: 500,
+        height: 450,
     },
 }));
 

@@ -18,6 +18,7 @@ import LegendCard from '../components/LegendCard';
 import DoughnutChart from '../components/charts/DoughnutChart';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
+import ChartCard from '../components/ChartCard';
 
 import rankImg from '../components/assets/img/Rankings/Diamond.png';
 import legend44Img from '../components/assets/img/legend_art/44.png';
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: 20,
     },
     mostPlayedCol: {
-        //margin: "auto",
+        margin: "auto",
     },
 }));
 
@@ -48,92 +49,12 @@ export default function MostPlayedLegends(props) {
             <Grid container md={12} className={classes.mostPlayedRow}>
                 <Grid item md={6} className={classes.mostPlayedCol}>
                     <LegendCard legendImg={legend44Img} />
-                    <DoughnutChart
-                        title="Win/Loss"
-                        labels={[
-                            "Wins",
-                            "Losses",
-                        ]}
-                        values={[
-                            93,
-                            11
-                        ]}
-                    />
-
-                    <BarChart
-                        title="Damage Breakdown"
-                        labels={[
-                            "Damage Given",
-                            "Damage Taken"
-                        ]}
-                        values={[
-                            [0, 40],
-                            [0, 200]
-                        ]}
-                    />
-
-                    <PieChart
-                        title="Damage Breakdown"
-                        labels={[
-                            "Axe",
-                            "Katar",
-                            "Gadget",
-                            "Unarmed",
-                            "Thrown",
-                        ]}
-                        values={[
-                            170,
-                            200,
-                            13,
-                            99,
-                            5
-                        ]}
-                    />
+                    <ChartCard />
                 </Grid>
 
                 <Grid item md={6} className={classes.mostPlayedCol}>
                     <LegendCard legendImg={legend44Img} />
-                    <DoughnutChart
-                        title="Win/Loss"
-                        labels={[
-                            "Wins",
-                            "Losses",
-                        ]}
-                        values={[
-                            93,
-                            11
-                        ]}
-                    />
-
-                    <BarChart
-                        title="Damage Breakdown"
-                        labels={[
-                            "Damage Given",
-                            "Damage Taken"
-                        ]}
-                        values={[
-                            [0, 40],
-                            [0, 200]
-                        ]}
-                    />
-
-                    <PieChart
-                        title="Damage Breakdown"
-                        labels={[
-                            "Axe",
-                            "Katar",
-                            "Gadget",
-                            "Unarmed",
-                            "Thrown",
-                        ]}
-                        values={[
-                            170,
-                            200,
-                            13,
-                            99,
-                            5
-                        ]}
-                    />
+                    <ChartCard />
                 </Grid>
             </Grid>
         </div>

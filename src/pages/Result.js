@@ -18,21 +18,12 @@ import legend44Img from '../components/assets/img/legend_art/44.png';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-        marginTop: 100,
+        marginTop: 70,
         padding: 3,
     },
     titlePaper: {
         width: 600,
-        padding: 20,
-        textAlign: "center",
         marginBottom: 30,
-        margin: "auto",
-    },
-    container: {
-
-    },
-    column: {
-
     },
     paper: {
         padding: 20,
@@ -78,22 +69,20 @@ export default function Result() {
 
     return (
         <div className={classes.root}>
-            <Grid container item md={12}>
-                <Paper className={classes.titlePaper}>
+            <Grid container item xs={12}>
+                <Paper className={classes.titlePaper, classes.paper}>
                     <Typography variant={heading1}>UserName</Typography>
                     <Typography variant={subHeading}>ID: 18764</Typography>
                 </Paper>
             </Grid>
 
-            <Grid container className={classes.container}>
+            <Grid container>
 
-                <Grid item md={6} className={classes.column}>
+                <Grid item sm={6}>
                     <Paper className={classes.paper}>
                         <Typography variant={heading2}>Overview</Typography>
                         <Typography variant={subHeading}>Level: 100</Typography>
                         <DoughnutChart
-                            width="400"
-                            height="400"
                             title="Win/Loss"
                             labels={[
                                 "Wins",
@@ -115,7 +104,7 @@ export default function Result() {
                         <LegendStats />
                     </Paper>
                 </Grid>
-                <Grid item md={6} className={classes.column}>
+                <Grid item sm={6}>
                     <Paper className={classes.paper}>
                         <Typography variant={heading2}>Current Season</Typography>
                         <RankedInfo
