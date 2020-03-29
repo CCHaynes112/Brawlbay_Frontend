@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
 
 
 const useStyles = makeStyles(theme => ({
@@ -30,11 +31,13 @@ export default function PlayerCard(props) {
         <Grid item md={3} className={classes.root}>
             <Card elevation={2} className={classes.card}>
                 <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={props.legendImg}
-                        title="LegendImg"
-                    />
+                    <Link href="/result">
+                        <CardMedia
+                            className={classes.media}
+                            image={props.legendImg}
+                            title="LegendImg"
+                        />
+                    </Link>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">Boomie</Typography>
                         <Typography variant="body2" component="p">Rating: 2906</Typography>
@@ -42,11 +45,6 @@ export default function PlayerCard(props) {
                         <Typography variant="body2" component="p">Wins: 485</Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary" href="/result">
-                        View Stats
-                    </Button>
-                </CardActions>
             </Card>
         </Grid>
     );

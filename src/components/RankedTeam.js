@@ -12,11 +12,17 @@ import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
 
+import rankImg from '../components/assets/img/Rankings/Diamond.png';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
         textAlign: "center",
     },
+    body: {
+        marginTop: 30,
+        justifyContent: "center",
+    }
 }));
 
 export default function RankedTeam(props) {
@@ -24,12 +30,12 @@ export default function RankedTeam(props) {
 
     return (
         <div className={classes.root}>
-            <Typography variant="h5">{props.members}</Typography>
-            <Grid container>
-                <Grid item container md={6}>
-                    <img src={props.team.rankedImg} />
+            <Typography variant="h6">{props.team.members}</Typography>
+            <Grid container className={classes.body}>
+                <Grid item md={6}>
+                    <img src={rankImg} />
                 </Grid>
-                <Grid item container md={6}>
+                <Grid item md={6}>
                     <Typography variant="body1">Region: {props.team.region}</Typography>
                     <Typography variant="body1">{props.team.rank}</Typography>
                     <Typography variant="body1">Peak Rating: {props.team.peakRating}</Typography>

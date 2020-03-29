@@ -6,11 +6,14 @@ import Grid from '@material-ui/core/Grid';
 
 import RankedInfo from '../components/RankedInfo';
 import LegendStats from '../components/LegendStats';
+import LegendCard from '../components/LegendCard';
+import MostPlayedLegends from '../components/MostPlayedLegends';
 import DoughnutChart from '../components/charts/DoughnutChart';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
 
 import rankImg from '../components/assets/img/Rankings/Diamond.png';
+import legend44Img from '../components/assets/img/legend_art/44.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,18 +37,23 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: 20,
         margin: "auto",
-        marginTop: 10,
+        marginTop: 20,
         textAlign: "center",
         width: "97%",
-        backgroundColor: "#fcfcfc",
+        //backgroundColor: "#fcfcfc",
     },
 }));
 
 export default function Result() {
     const classes = useStyles();
 
+    const heading1 = ("h3");
+    const heading2 = ("h4");
+    const subHeading = ("h5");
+
     const teamList = [
         {
+            members: "chaynes + otherGuy",
             rankedImg: { rankImg },
             region: "US-W",
             rank: "Gold",
@@ -56,6 +64,7 @@ export default function Result() {
             losses: "2",
         },
         {
+            members: "Guy1 + Dude2",
             rankedImg: { rankImg },
             region: "US-E",
             rank: "Platinum",
@@ -71,17 +80,17 @@ export default function Result() {
         <div className={classes.root}>
             <Grid container item md={12}>
                 <Paper className={classes.titlePaper}>
-                    <Typography variant="h2">UserName</Typography>
-                    <Typography variant="h6">ID: 18764</Typography>
+                    <Typography variant={heading1}>UserName</Typography>
+                    <Typography variant={subHeading}>ID: 18764</Typography>
                 </Paper>
             </Grid>
 
             <Grid container className={classes.container}>
 
-                <Grid item container md={6} className={classes.column}>
+                <Grid item md={6} className={classes.column}>
                     <Paper className={classes.paper}>
-                        <Typography variant="h3">Overview</Typography>
-                        <Typography variant="h6">Level: 100</Typography>
+                        <Typography variant={heading2}>Overview</Typography>
+                        <Typography variant={subHeading}>Level: 100</Typography>
                         <DoughnutChart
                             width="400"
                             height="400"
@@ -98,6 +107,17 @@ export default function Result() {
                     </Paper>
 
                     <Paper className={classes.paper}>
+                        <Typography variant={heading2}>Most Played Legends</Typography>
+                        <MostPlayedLegends />
+                    </Paper>
+                    <Paper className={classes.paper}>
+                        <Typography variant={heading2}>Legend Stats</Typography>
+                        <LegendStats />
+                    </Paper>
+                </Grid>
+                <Grid item md={6} className={classes.column}>
+                    <Paper className={classes.paper}>
+                        <Typography variant={heading2}>Current Season</Typography>
                         <RankedInfo
                             type="1v1"
                             rankedImg={rankImg}
@@ -112,61 +132,11 @@ export default function Result() {
                     </Paper>
 
                     <Paper className={classes.paper}>
+                        <Typography variant={heading2}>Current Season</Typography>
                         <RankedInfo
                             type="2v2"
                             teams={teamList}
                         />
-                    </Paper>
-                </Grid>
-                <Grid item container md={6} className={classes.column}>
-                    <Paper className={classes.paper}>
-                        <Typography variant="h3">Most Played Legends</Typography>
-                        <DoughnutChart
-                            width="400"
-                            height="400"
-                            title="Win/Loss"
-                            labels={[
-                                "Wins",
-                                "Losses",
-                            ]}
-                            values={[
-                                93,
-                                11
-                            ]}
-                        />
-
-                        <BarChart
-                            title="Damage Breakdown"
-                            labels={[
-                                "Damage Given",
-                                "Damage Taken"
-                            ]}
-                            values={[
-                                [0, 40],
-                                [0, 200]
-                            ]}
-                        />
-
-                        <PieChart
-                            title="Damage Breakdown"
-                            labels={[
-                                "Axe",
-                                "Katar",
-                                "Gadget",
-                                "Unarmed",
-                                "Thrown",
-                            ]}
-                            values={[
-                                170,
-                                200,
-                                13,
-                                99,
-                                5
-                            ]}
-                        />
-                    </Paper>
-                    <Paper className={classes.paper}>
-                        <LegendStats />
                     </Paper>
                 </Grid>
 
