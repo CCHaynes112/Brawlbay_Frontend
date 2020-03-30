@@ -6,14 +6,10 @@ import Grid from '@material-ui/core/Grid';
 
 import RankedInfo from '../components/RankedInfo';
 import LegendStats from '../components/LegendStats';
-import LegendCard from '../components/LegendCard';
 import MostPlayedLegends from '../components/MostPlayedLegends';
 import DoughnutChart from '../components/charts/DoughnutChart';
-import BarChart from '../components/charts/BarChart';
-import PieChart from '../components/charts/PieChart';
 
 import rankImg from '../components/assets/img/Rankings/Diamond.png';
-import legend44Img from '../components/assets/img/legend_art/44.png';
 
 const useStyles = makeStyles(theme => ({
     root: {

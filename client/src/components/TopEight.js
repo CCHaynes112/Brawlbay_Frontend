@@ -38,7 +38,7 @@ export default function TopEight() {
     return (
         <div className={classes.root}>
             <Grid container justify="center">
-                <img src={top8Img} className={classes.topPlayers} />
+                <img src={top8Img} className={classes.topPlayers} alt="Top8" />
             </Grid>
 
             <Grid container spacing={2} className={classes.cardContainer}>

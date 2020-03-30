@@ -1,14 +1,22 @@
 version: "3.7"
 services:
-    brawlbay-dev:
-        container_name: brawlbay-dev
+    frontend:
+        container_name: brawlbay_client
         build: 
-            context: .
+            context: ./client
             dockerfile: Dockerfile
+        image: chaynes/brawlbay_client
         ports:
             - "3000:3000"
         volumes:
-            - ".:/app"
-            - "/app/node_modules"
-        environment:
-            - NODE_ENV=development
+            - ./client:/usr/src/app
+    backend:
+        container_name: brawlbay_server
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        image: chaynes/brawlbay_server
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./server:/usr/src/app

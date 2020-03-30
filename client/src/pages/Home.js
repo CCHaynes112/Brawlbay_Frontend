@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
@@ -39,6 +39,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
     const classes = useStyles();
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/test")
+            //.then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                },
+                (error) => {
+                    console.log("ERROR: " + error);
+                }
+            )
+    });
 
     return (
         <div className={classes.root}>

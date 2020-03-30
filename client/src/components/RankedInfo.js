@@ -1,16 +1,7 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import SearchIcon from '@material-ui/icons/Search';
-import Grid from '@material-ui/core/Grid';
 
 import RankedTeam from '../components/RankedTeam';
 
@@ -39,10 +30,10 @@ export default function RankedInfo(props) {
 
     let rankedContent;
 
-    if (props.type == "1v1") {
+    if (props.type === "1v1") {
         rankedContent = (
             <div>
-                <img src={props.rankedImg} />
+                <img src={props.rankedImg} alt="Rank" />
                 <Typography variant="body1">Region: {props.region}</Typography>
                 <Typography variant="body1">{props.rank}</Typography>
                 <Typography variant="body1">Peak Rating: {props.peakRating}</Typography>
