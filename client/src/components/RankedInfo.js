@@ -48,8 +48,8 @@ export default function RankedInfo(props) {
         rankedContent = (
             <div className={classes.rankedTeams}>
                 {
-                    props.teams.map((team) =>
-                        <Paper elevation="2" className={classes.paper}>
+                    props.teams.map((team, key) =>
+                        <Paper key={key} elevation={2} className={classes.paper}>
                             <RankedTeam team={team} />
                         </Paper>
                     )

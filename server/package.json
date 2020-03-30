@@ -4,10 +4,13 @@
     "description": "",
     "main": "index.js",
     "dependencies": {
-        "express": "*"
+        "axios": "^0.19.2",
+        "cors": "^2.8.5",
+        "express": "*",
+        "nodemon": "^2.0.2"
     },
     "scripts": {
-        "start": "node index.js",
+        "start": "nodemon node index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",

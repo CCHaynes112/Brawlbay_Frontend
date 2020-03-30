@@ -45,7 +45,7 @@ export default function LegendCard(props) {
                 <Grid container className={classes.grid}>
                     <Grid item md={9}>
                         <Typography gutterBottom variant="h5" component="h2">Boomie</Typography>
-                        <Typography gutterBottom variant="p" component="p">Level: 68</Typography>
+                        <Typography gutterBottom variant="body1" component="p">Level: 68</Typography>
                     </Grid>
                     <Grid item md={3}>
                         <IconButton>

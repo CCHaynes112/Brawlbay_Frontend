@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import AppBar from '@material-ui/core/AppBar';
@@ -39,12 +38,12 @@ function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
     return (
-        <Typography
+        <div
             id={`simple-tabpanel-${index}`}
             {...other}
         >
             {value === index && <Box>{children}</Box>}
-        </Typography>
+        </div>
     );
 }
 

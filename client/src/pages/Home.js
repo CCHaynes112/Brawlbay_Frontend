@@ -40,19 +40,6 @@ const useStyles = makeStyles(theme => ({
 export default function Home() {
     const classes = useStyles();
 
-    useEffect(() => {
-        fetch("http://localhost:5000/api/test")
-            //.then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                },
-                (error) => {
-                    console.log("ERROR: " + error);
-                }
-            )
-    });
-
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>

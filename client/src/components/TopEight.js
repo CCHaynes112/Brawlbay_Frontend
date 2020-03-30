@@ -1,20 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import PlayerCard from './PlayerCard';
 
 import top8Img from './assets/img/TopEight.jpg'
 
 import legend44Img from './assets/img/legend_art/44.png';
-import legend5Img from './assets/img/legend_art/5.png';
-import legend3Img from './assets/img/legend_art/3.png';
-import legend14Img from './assets/img/legend_art/14.png';
-
-import legend30Img from './assets/img/legend_art/30.png';
-import legend36Img from './assets/img/legend_art/36.png';
-import legend22Img from './assets/img/legend_art/22.png';
-import legend28Img from './assets/img/legend_art/28.png';
+console.log(legend44Img);
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,6 +29,42 @@ const useStyles = makeStyles(theme => ({
 export default function TopEight() {
     const classes = useStyles();
 
+    const [playerArray, setPlayerArray] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [loadError, setLoadError] = useState(null);
+
+    let playersElement;
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/topRanked")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setPlayerArray(result);
+                    console.log(result);
+                },
+                (error) => {
+                    setLoadError(error);
+                }
+            )
+    }, [isLoaded, isLoaded]);
+
+    if (!isLoaded) {
+        playersElement = (<Typography>Loading...</Typography>)
+    }
+
+    else if (loadError) {
+        playersElement = (<Typography>Error: {loadError}</Typography>)
+    }
+
+    else {
+        console.log("Loaded!")
+        playersElement = playerArray.map((player, key) =>
+            <PlayerCard key={key} legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)} />
+        )
+    }
+
     return (
         <div className={classes.root}>
             <Grid container justify="center">
@@ -43,16 +73,7 @@ export default function TopEight() {
 
             <Grid container spacing={2} className={classes.cardContainer}>
                 <Grid container item xs={12} spacing={3} className={classes.cardContainer}>
-                    <PlayerCard legendImg={legend44Img} />
-                    <PlayerCard legendImg={legend5Img} />
-                    <PlayerCard legendImg={legend3Img} />
-                    <PlayerCard legendImg={legend14Img} />
-                </Grid>
-                <Grid container item xs={12} spacing={3} className={classes.cardContainer}>
-                    <PlayerCard legendImg={legend30Img} />
-                    <PlayerCard legendImg={legend36Img} />
-                    <PlayerCard legendImg={legend22Img} />
-                    <PlayerCard legendImg={legend28Img} />
+                    {playersElement}
                 </Grid>
             </Grid>
         </div>

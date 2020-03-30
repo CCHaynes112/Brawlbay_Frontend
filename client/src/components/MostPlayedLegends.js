@@ -28,7 +28,7 @@ export default function MostPlayedLegends(props) {
 
     return (
         <div className={classes.root}>
-            <Grid container md={12} className={classes.mostPlayedRow}>
+            <Grid container className={classes.mostPlayedRow}>
                 <Grid item md={6} className={classes.mostPlayedCol}>
                     <LegendCard legendImg={legend44Img} />
                     <ChartCard />
