@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import PlayerCard from './PlayerCard';
 
@@ -51,7 +52,7 @@ export default function TopEight() {
     }, [isLoaded, isLoaded]);
 
     if (!isLoaded) {
-        playersElement = (<Typography>Loading...</Typography>)
+        playersElement = (<CircularProgress />)
     }
 
     else if (loadError) {
@@ -61,7 +62,14 @@ export default function TopEight() {
     else {
         console.log("Loaded!")
         playersElement = playerArray.map((player, key) =>
-            <PlayerCard key={key} legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)} />
+            <PlayerCard
+                key={key}
+                legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)}
+                playerName={player.name}
+                playerRegion={player.region}
+                playerRating={player.rating}
+                playerWins={player.wins}
+            />
         )
     }
 

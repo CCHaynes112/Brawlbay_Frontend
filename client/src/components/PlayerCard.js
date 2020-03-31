@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
     card: {
         width: 200,
+
     },
     media: {
         width: "100%",
@@ -38,10 +39,10 @@ export default function PlayerCard(props) {
                         />
 
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">Boomie</Typography>
-                            <Typography variant="body2" component="p">Rating: 2906</Typography>
-                            <Typography variant="body2" component="p">US-E</Typography>
-                            <Typography variant="body2" component="p">Wins: 485</Typography>
+                            <Typography noWrap={true} gutterBottom variant="h5" component="h2">{props.playerName}</Typography>
+                            <Typography variant="body2" component="p">Rating: {props.playerRating}</Typography>
+                            <Typography variant="body2" component="p">{props.playerRegion}</Typography>
+                            <Typography variant="body2" component="p">Wins: {props.playerWins}</Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
