@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import axios from 'axios';
+
 import PlayerCard from './PlayerCard';
 
 import top8Img from './assets/img/TopEight.jpg'
@@ -37,18 +39,15 @@ export default function TopEight() {
     let playersElement;
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/topRanked")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setPlayerArray(result);
-                    console.log(result);
-                },
-                (error) => {
-                    setLoadError(error);
-                }
-            )
+        axios.get("http://localhost:5000/api/topRanked")
+            .then(res => {
+                setIsLoaded(true);
+                setPlayerArray(res.data);
+                console.log(res.data);
+            })
+            .catch(error => {
+                setLoadError(error.data);
+            })
     }, [isLoaded, isLoaded]);
 
     if (!isLoaded) {

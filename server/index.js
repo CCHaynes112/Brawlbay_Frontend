@@ -34,25 +34,21 @@ app.get('/api/topRanked', (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.send(error)
+            res.send("Error loading top ranked")
         });
 });
 
 app.get('/api/searchPlayer', (req, res) => {
-    axios.get("https://api.brawlhalla.com/player/" + req.playerToSearch + '/stats?api_key=' + brawlhallaAPIKey)
+    axios.get("https://api.brawlhalla.com/player/" + req.query.player + '/stats?api_key=' + brawlhallaAPIKey)
         .then(axRes => {
-            console.log(axRes)
-            res.send(axRes);
+            console.log(axRes.data);
+            res.send(axRes.data);
         })
         .catch(error => {
-            console.log(error);
-            res.send(error)
+            res.send("Error loading player data for player: " + req.query.player);
         });
 });
 
 app.listen(5000, () => {
     console.log("Listening on port 5000");
 });
-
-
-//https://api.brawlhalla.com/player/' + str(usr_input) + '/stats?api_key=' + api_key

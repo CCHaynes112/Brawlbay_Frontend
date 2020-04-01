@@ -20,6 +20,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 
+import axios from 'axios';
+
 
 const useStyles = makeStyles(theme => ({
     searchBar: {
@@ -56,20 +58,22 @@ function PlayersModal(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [loadError, setLoadError] = useState(null);
 
+
+
     function getPlayers() {
-        fetch("http://localhost:5000/api/searchPlayer/?playerName=" + playerToSearch)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    //setIsLoaded(true);
-                    //setPlayersArray(result);
-                    console.log("PlayerSearch:");
-                    console.log(result);
-                },
-                (error) => {
-                    setLoadError(error);
-                }
-            )
+        axios.get("http://localhost:5000/api/searchPlayer", {
+            params: {
+                player: playerToSearch
+            }
+        })
+            .then(res => {
+                setIsLoaded(true);
+                setPlayersArray([res.data]);
+                console.log(playersArray);
+            })
+            .catch(error => {
+                setLoadError(error.data);
+            })
     }
 
     let playersListElement;
@@ -85,9 +89,10 @@ function PlayersModal(props) {
         console.log("Loaded player list!")
         playersListElement = (
             <List>
-                {playersArray.map(player => (
-                    <ListItem button onClick={() => handleListItemClick(player)} key={player}>
-                        <ListItemText primary={player} />
+                {
+                playersArray.map((player, key) => (
+                    <ListItem button onClick={() => handleListItemClick(player)} key={key}>
+                        <ListItemText primary={player.name} />
                     </ListItem>
                 ))}
             </List>
