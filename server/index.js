@@ -33,22 +33,61 @@ app.get('/api/topRanked', (req, res) => {
             res.send(axRes.data.slice(0, 8));
         })
         .catch(error => {
-            console.log(error);
+            console.log("Error: " + error)
             res.send("Error loading top ranked")
         });
 });
 
 app.get('/api/searchPlayer', (req, res) => {
-    axios.get("https://api.brawlhalla.com/player/" + req.query.player + '/stats?api_key=' + brawlhallaAPIKey)
-        .then(axRes => {
-            console.log(axRes.data);
-            res.send(axRes.data);
-        })
-        .catch(error => {
-            res.send("Error loading player data for player: " + req.query.player);
-        });
+    getUsers(req, res);
 });
 
 app.listen(5000, () => {
     console.log("Listening on port 5000");
 });
+
+
+function getUsers(req, res) {
+    var playerID = req.query.player;
+
+    if (playerID.match(/[a-zA-Z]/) != null) {
+        // There are letters, can't be an id
+        getPlayerByName(req, res, playerID);
+    }
+    else {
+        // Input is only numbers
+        getPlayerByID(req, res, playerID);
+    }
+}
+
+function getPlayerByName(req, res, playerID) {
+    axios.get("https://api.brawlhalla.com/rankings/1v1/all/1?api_key=" + brawlhallaAPIKey + "&name=" + playerID)
+        .then(axRes => {
+            res.send(axRes.data);
+        })
+        .catch(error => {
+            console.log("Error: " + error)
+            res.send("Error loading player data for player: " + playerID)
+        });
+}
+
+function getPlayerByID(req, res, playerID) {
+    // Try to find user by Brawlhalla ID
+    axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
+        .then(axRes => {
+            res.send([axRes.data]);
+        })
+        .catch(error => {
+            // Couldn't find user, Try to find user by Steam ID
+            axios.get("https://api.brawlhalla.com/search?steamid=" + playerID + '&api_key=' + brawlhallaAPIKey)
+                .then(axRes => {
+                    res.send([axRes.data]);
+                })
+            console.log("Error: " + error)
+            res.send("Error loading player data for player: " + playerID);
+        });
+}
+
+function getPlayerBySteamID(playerID) {
+
+}

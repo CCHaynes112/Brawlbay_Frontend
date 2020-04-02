@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
+import { useHistory} from "react-router-dom";
+
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,11 +17,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import axios from 'axios';
 
@@ -40,6 +46,8 @@ const useStyles = makeStyles(theme => ({
 
 function PlayersModal(props) {
     const classes = useStyles();
+    const history = useHistory();
+
     const { playerToSearch, onClose, open } = props;
 
     const handleEnter = () => {
@@ -51,7 +59,8 @@ function PlayersModal(props) {
     };
 
     const handleListItemClick = value => {
-        onClose(value);
+        //onClose(value);
+        history.push("/result?player=" + value.name);
     };
 
     const [playersArray, setPlayersArray] = useState([]);
@@ -68,8 +77,8 @@ function PlayersModal(props) {
         })
             .then(res => {
                 setIsLoaded(true);
-                setPlayersArray([res.data]);
-                console.log(playersArray);
+                setPlayersArray(res.data);
+                console.log("Loaded player list!")
             })
             .catch(error => {
                 setLoadError(error.data);
@@ -86,15 +95,20 @@ function PlayersModal(props) {
     }
 
     else {
-        console.log("Loaded player list!")
         playersListElement = (
             <List>
                 {
-                playersArray.map((player, key) => (
-                    <ListItem button onClick={() => handleListItemClick(player)} key={key}>
-                        <ListItemText primary={player.name} />
-                    </ListItem>
-                ))}
+                    playersArray.map((player, key) => (
+                        <div key={key}>
+                            <ListItem button onClick={() => handleListItemClick(player)}>
+                                <ListItemIcon>
+                                    <AccountCircleIcon fontSize="large" />
+                                </ListItemIcon>
+                                <ListItemText primary={player.name} />
+                            </ListItem>
+                            <Divider />
+                        </div>
+                    ))}
             </List>
         )
     }
@@ -127,7 +141,12 @@ export default function PlayerSearchBar() {
     return (
         <FormControl className={classes.searchBar}>
             <InputLabel>Search...</InputLabel>
-            <Input value={playerName} onChange={handleTextChange} endAdornment={
+            <Input onKeyDown={(e) => {
+                if(e.key === "Enter") {
+                    handleClickOpen();
+                }
+            }} 
+            value={playerName} onChange={handleTextChange} endAdornment={
                 <InputAdornment position="end">
                     <IconButton onClick={handleClickOpen}>
                         <SearchIcon />
