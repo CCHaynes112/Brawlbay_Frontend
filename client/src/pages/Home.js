@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
         height: 400,
         textAlign: "center",
         backgroundImage: "url(" + bannerImg + ")",
-        backgroundPosition: 'center',
+        backgroundPosition: 'top',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
     },

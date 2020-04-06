@@ -10,7 +10,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import logo from './assets/img/Logo.png';
+import logo from './assets/img/Logo-White.png';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
         backgroundColor: theme.palette.primary,
+    },
+    logo: {
+        width: 250,
     },
     search: {
         position: 'relative',
@@ -124,7 +127,7 @@ export default function Header() {
             <AppBar position="fixed">
                 <Toolbar>
                     <div className={classes.title}>
-                        <a href="/"><img src={logo} alt="Logo" /></a>
+                        <a href="/"><img src={logo} alt="Logo" className={classes.logo} /></a>
                     </div>
 
                     <div className={classes.desktopView}>
