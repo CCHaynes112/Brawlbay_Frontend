@@ -1,6 +1,6 @@
 ### Custom ###
 secrets.js
-/build
+build
 
 # Created by https://www.gitignore.io/api/node,react,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,react,visualstudiocode
