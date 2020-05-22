@@ -10,7 +10,7 @@ import bannerImg from '../components/assets/img/Brawlbay_Banner_Gradient_lighter
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-        marginTop: 100,
+        marginTop: 70,
     },
     paper: {
         marginTop: 20,
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
     banner: {
         width: "100%",
-        height: 400,
+        height: 600,
         textAlign: "center",
         backgroundImage: "url(" + bannerImg + ")",
         backgroundPosition: 'top',
@@ -39,9 +39,7 @@ export default function Home() {
                 </div>
             </Paper>
 
-            <Paper className={classes.paper}>
-                <TopEight />
-            </Paper>
+            <TopEight />
         </div>
     );
 }

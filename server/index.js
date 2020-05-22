@@ -30,7 +30,7 @@ app.get('/api/test', (req, res) => {
 app.get('/api/topRanked', (req, res) => {
     axios.get("https://api.brawlhalla.com/rankings/1v1/all/1?api_key=" + brawlhallaAPIKey)
         .then(axRes => {
-            res.send(axRes.data.slice(0, 8));
+            res.send(axRes.data.slice(0, 6));
         })
         .catch(error => {
             console.log("Error: " + error)

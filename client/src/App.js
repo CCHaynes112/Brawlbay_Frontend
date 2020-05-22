@@ -21,8 +21,8 @@ export default function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
-        <Container>
+        <Header>
+        <Container maxWidth="xl">
           <Switch>
             <Route exact path="/">
               <Home />
@@ -32,6 +32,7 @@ export default function App() {
             </Route>
           </Switch>
         </Container>
+        </Header>
         <Footer />
       </ThemeProvider>
     </Router>

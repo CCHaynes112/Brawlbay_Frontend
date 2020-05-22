@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import PlayerCard from './PlayerCard';
 
-import top8Img from './assets/img/TopEight.jpg'
+import top8Img from './assets/img/TopSix.png'
 
 import legend44Img from './assets/img/legend_art/44.png';
 console.log(legend44Img);
@@ -16,15 +16,15 @@ console.log(legend44Img);
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: "10%",
         paddingTop: "2rem",
+        paddingBottom: "2rem",
     },
     topPlayers: {
-        width: 400,
+        width: 500,
         marginBottom: 30,
     },
     cardContainer: {
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
     },
 }));
@@ -61,14 +61,16 @@ export default function TopEight() {
     else {
         console.log("Loaded!")
         playersElement = playerArray.map((player, key) =>
-            <PlayerCard
-                key={key}
-                legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)}
-                playerName={player.name}
-                playerRegion={player.region}
-                playerRating={player.rating}
-                playerWins={player.wins}
-            />
+            <Grid item>
+                <PlayerCard
+                    key={key}
+                    legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)}
+                    playerName={player.name}
+                    playerRegion={player.region}
+                    playerRating={player.rating}
+                    playerWins={player.wins}
+                />
+            </Grid>
         )
     }
 
@@ -78,10 +80,8 @@ export default function TopEight() {
                 <img src={top8Img} className={classes.topPlayers} alt="Top8" />
             </Grid>
 
-            <Grid container spacing={2} className={classes.cardContainer}>
-                <Grid container item xs={12} spacing={3} className={classes.cardContainer}>
-                    {playersElement}
-                </Grid>
+            <Grid container xs={12} spacing={1} className={classes.cardContainer}>
+                {playersElement}
             </Grid>
         </div>
     );
