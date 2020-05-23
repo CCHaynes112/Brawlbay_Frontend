@@ -1,165 +1,6 @@
-// import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Button from '@material-ui/core/Button';
-// import IconButton from '@material-ui/core/IconButton';
-// import Menu from '@material-ui/core/Menu';
-// import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-// import MoreIcon from '@material-ui/icons/MoreVert';
-
-import logo from './assets/img/Logo-Black.png';
-
-// const useStyles = makeStyles(theme => ({
-//     menuButton: {
-//         marginRight: theme.spacing(2),
-//     },
-//     title: {
-//         flexGrow: 1,
-//         backgroundColor: theme.palette.primary,
-//     },
-//     logo: {
-//         width: 250,
-//     },
-//     search: {
-//         position: 'relative',
-//         borderRadius: theme.shape.borderRadius,
-//         backgroundColor: fade(theme.palette.common.white, 0.15),
-//         '&:hover': {
-//             backgroundColor: fade(theme.palette.common.white, 0.25),
-//         },
-//         marginLeft: 0,
-//         width: '100%',
-//         [theme.breakpoints.up('sm')]: {
-//             marginLeft: theme.spacing(1),
-//             width: 'auto',
-//         },
-//     },
-//     searchIcon: {
-//         width: theme.spacing(7),
-//         height: '100%',
-//         position: 'absolute',
-//         pointerEvents: 'none',
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//     inputRoot: {
-//         color: 'inherit',
-//     },
-//     inputInput: {
-//         padding: theme.spacing(1, 1, 1, 7),
-//         transition: theme.transitions.create('width'),
-//         width: '100%',
-//         [theme.breakpoints.up('sm')]: {
-//             width: 120,
-//             '&:focus': {
-//                 width: 200,
-//             },
-//         },
-//     },
-//     desktopView: {
-//         display: 'none',
-//         [theme.breakpoints.up('md')]: {
-//             display: 'flex',
-//         },
-//     },
-//     mobileView: {
-//         display: 'flex',
-//         [theme.breakpoints.up('md')]: {
-//             display: 'none',
-//         },
-//     },
-// }));
-
-// export default function Header() {
-//     const classes = useStyles();
-
-//     //The anchor object where the menu will spawn
-//     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-//     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-//     const handleMobileMenuOpen = event => {
-//         setMobileMoreAnchorEl(event.currentTarget);
-//     };
-
-//     const handleMobileMenuClose = () => {
-//         setMobileMoreAnchorEl(null);
-//     };
-
-//     const renderMenu = (
-//         <Menu
-//             anchorEl={mobileMoreAnchorEl}
-//             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-//             keepMounted
-//             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-//             open={isMobileMenuOpen}
-//             onClose={handleMobileMenuClose}
-//         >
-//             <MenuItem>
-//                 <div className={classes.search}>
-//                     <div className={classes.searchIcon}>
-//                         <SearchIcon />
-//                     </div>
-//                     <InputBase
-//                         placeholder="Search…"
-//                         classes={{
-//                             root: classes.inputRoot,
-//                             input: classes.inputInput,
-//                         }}
-//                         inputProps={{ 'aria-label': 'search' }}
-//                     />
-//                 </div>
-//             </MenuItem>
-//             <MenuItem>
-//                 <Button color="inherit" href="/">Home</Button>
-//             </MenuItem>
-//             <MenuItem>
-//                 <Button color="inherit" target="_blank" href="https://www.brawlhalla.com/rankings/1v1/">Leaderboards</Button>
-//             </MenuItem>
-//         </Menu>
-//     );
-
-//     return (
-//         <div>
-//             <AppBar position="fixed">
-//                 <Toolbar>
-//                     <div className={classes.title}>
-//                         <a href="/"><img src={logo} alt="Logo" className={classes.logo} /></a>
-//                     </div>
-
-//                     <div className={classes.desktopView}>
-//                         <Button color="inherit" href="/">Home</Button>
-//                         <Button color="inherit" target="_blank" href="https://www.brawlhalla.com/rankings/1v1/">Leaderboards</Button>
-//                         <div className={classes.search}>
-//                             <div className={classes.searchIcon}>
-//                                 <SearchIcon />
-//                             </div>
-//                             <InputBase
-//                                 placeholder="Search…"
-//                                 classes={{
-//                                     root: classes.inputRoot,
-//                                     input: classes.inputInput,
-//                                 }}
-//                                 inputProps={{ 'aria-label': 'search' }}
-//                             />
-//                         </div>
-//                     </div>
-
-//                     <div className={classes.mobileView}>
-//                         <IconButton color="inherit" onClick={handleMobileMenuOpen}>
-//                             <MoreIcon />
-//                         </IconButton>
-//                     </div>
-//                 </Toolbar>
-//             </AppBar>
-//             {renderMenu}
-//         </div>
-//     );
-// }
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -178,6 +19,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
+import ToggleOffIcon from '@material-ui/icons/ToggleOff';
+import SettingsIcon from '@material-ui/icons/Settings';
+
+import logo from './assets/img/Logo-Black.png';
 
 const drawerWidth = 240;
 
@@ -205,6 +50,11 @@ const useStyles = makeStyles((theme) => ({
     },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
+    flexEnd: {
+        display: "flex",
+        justifyContent: "flex-end",
+    },
+
     drawerPaper: {
         width: drawerWidth,
     },
@@ -270,9 +120,12 @@ const useStyles = makeStyles((theme) => ({
             },
         },
     },
+    iconWhite: {
+        color: theme.palette.text.secondary,
+    }
 }));
 
-function ResponsiveDrawer(props) {
+function Header(props) {
     const { container } = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -289,46 +142,46 @@ function ResponsiveDrawer(props) {
             </div>
             <Divider />
             <List className={classes.drawerList}>
-                <ListItem button >
+                <ListItem button component="a" href="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button component="a" href="items">
                     <ListItemText primary="Items" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button component="a" href="legends">
                     <ListItemText primary="Legends" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Rankings" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="1v1leaderboard">
                     <ListItemText primary="1v1 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="2v2leaderboard">
                     <ListItemText primary="2v2 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="ratings">
                     <ListItemText primary="Rating Distribution" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Community" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="streams">
                     <ListItemText primary="Streams" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="tournaments">
                     <ListItemText primary="Tournaments" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="videos">
                     <ListItemText primary="Videos" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={classes.nested} component="a" href="gifs">
                     <ListItemText primary="Gifs" />
                 </ListItem>
-                <ListItem>
+                <ListItem button  component="a" href="contact">
                     <ListItemText primary="Contact" />
                 </ListItem>
             </List>
@@ -339,7 +192,7 @@ function ResponsiveDrawer(props) {
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className={classes.flexEnd}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -362,10 +215,11 @@ function ResponsiveDrawer(props) {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
+                    <IconButton className={classes.iconWhite}><ToggleOffIcon fontSize="large" /></IconButton>
+                    <IconButton className={classes.iconWhite}><SettingsIcon /></IconButton>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer}>
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Hidden smUp implementation="css">
                     <Drawer
                         container={container}
@@ -402,4 +256,4 @@ function ResponsiveDrawer(props) {
     );
 }
 
-export default ResponsiveDrawer;
+export default Header;

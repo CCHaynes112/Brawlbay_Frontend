@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
-import TopEight from '../components/TopEight';
+import TopEight from '../components/TopPlayers';
 import PlayerSearchBar from '../components/PlayerSearchBar';
 
 import bannerImg from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';

@@ -24,12 +24,12 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 30,
     },
     cardContainer: {
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "center",
     },
 }));
 
-export default function TopEight() {
+export default function TopPlayers() {
     const classes = useStyles();
 
     const [playerArray, setPlayerArray] = useState([]);

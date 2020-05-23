@@ -31,11 +31,11 @@ import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     searchBar: {
-        marginTop: 300,
+        marginTop: 400,
         width: "60%",
     },
-    modal: {
-
+    searchLabel: {
+        color: theme.palette.text.primary,
     },
     progressBar: {
         padding: 20,
@@ -140,7 +140,7 @@ export default function PlayerSearchBar() {
 
     return (
         <FormControl className={classes.searchBar}>
-            <InputLabel>Search...</InputLabel>
+            <InputLabel className={classes.searchLabel}>Search...</InputLabel>
             <Input onKeyDown={(e) => {
                 if(e.key === "Enter") {
                     handleClickOpen();
