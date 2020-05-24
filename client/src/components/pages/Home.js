@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
     paper: {
         marginTop: 20,
         marginBottom: 20,
-        //backgroundColor: "#fcfcfc",
     },
     banner: {
         width: "100%",

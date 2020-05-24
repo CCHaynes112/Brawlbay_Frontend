@@ -60,7 +60,6 @@ export default function TopPlayers() {
                     playerID={player.brawlhalla_id}
                     legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)}
                     playerName={player.name}
-                    playerRegion={player.region}
                     playerRating={player.rating}
                     playerWins={player.wins}
                 />
