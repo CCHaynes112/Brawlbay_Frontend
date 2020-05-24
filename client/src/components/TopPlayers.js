@@ -5,14 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import axios from 'axios';
-
 import PlayerCard from './PlayerCard';
-
-import top8Img from './assets/img/TopSix.png'
-
-import legend44Img from './assets/img/legend_art/44.png';
-console.log(legend44Img);
-
+import topCountImg from './assets/img/TopSix.png'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,7 +37,7 @@ export default function TopPlayers() {
             .then(res => {
                 setIsLoaded(true);
                 setPlayerArray(res.data);
-                console.log(res.data);
+                console.log(res.data)
             })
             .catch(error => {
                 setLoadError(error.data);
@@ -61,9 +55,9 @@ export default function TopPlayers() {
     else {
         console.log("Loaded!")
         playersElement = playerArray.map((player, key) =>
-            <Grid item>
+            <Grid item key={key}>
                 <PlayerCard
-                    key={key}
+                    playerID={player.brawlhalla_id}
                     legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)}
                     playerName={player.name}
                     playerRegion={player.region}
@@ -77,10 +71,10 @@ export default function TopPlayers() {
     return (
         <div className={classes.root}>
             <Grid container justify="center">
-                <img src={top8Img} className={classes.topPlayers} alt="Top8" />
+                <img src={topCountImg} className={classes.topPlayers} alt="TopPlayers" />
             </Grid>
 
-            <Grid container xs={12} spacing={1} className={classes.cardContainer}>
+            <Grid container spacing={1} className={classes.cardContainer}>
                 {playersElement}
             </Grid>
         </div>

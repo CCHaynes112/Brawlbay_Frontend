@@ -60,7 +60,7 @@ function PlayersModal(props) {
 
     const handleListItemClick = value => {
         //onClose(value);
-        history.push("/result?player=" + value.name);
+        history.push("/players/" + value.brawlhalla_id);
     };
 
     const [playersArray, setPlayersArray] = useState([]);
@@ -78,7 +78,6 @@ function PlayersModal(props) {
             .then(res => {
                 setIsLoaded(true);
                 setPlayersArray(res.data);
-                console.log("Loaded player list!")
             })
             .catch(error => {
                 setLoadError(error.data);

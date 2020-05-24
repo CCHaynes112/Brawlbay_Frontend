@@ -7,13 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        //margin: 1,
-        textAlign: "left",
-    },
     card: {
         width: 200,
         textAlign: "left",
@@ -21,13 +18,13 @@ const useStyles = makeStyles(theme => ({
     },
     media: {
         width: "100%",
-        height: 275,
+        height: 350,
     },
-    content: {
-        paddingBottom: 0,
-    },
-    grid: {
-
+    cardcontent: {
+        padding: 6,
+        "&:last-child": {
+            paddingBottom: 6
+        }
     }
 }));
 
@@ -35,25 +32,18 @@ export default function LegendCard(props) {
     const classes = useStyles();
 
     return (
-        <Card elevation={2} className={classes.card}>
-            <CardMedia
-                className={classes.media}
-                image={props.legendImg}
-                title="LegendImg"
-            />
-            <CardContent className={classes.content}>
-                <Grid container className={classes.grid}>
-                    <Grid item md={9}>
-                        <Typography gutterBottom variant="h5" component="h2">Boomie</Typography>
-                        <Typography gutterBottom variant="body1" component="p">Level: 68</Typography>
-                    </Grid>
-                    <Grid item md={3}>
-                        <IconButton>
-                            <ExpandMore />
-                        </IconButton>
-                    </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
+        <Link href={"/legends/" + props.legendID} underline="none">
+            <Card elevation={2} className={classes.card}>
+                <CardMedia
+                    className={classes.media}
+                    image={props.legendImg}
+                    title="LegendImg"
+                />
+                <CardContent className={classes.cardcontent}>
+                    <Typography gutterBottom variant="h6">{props.name}</Typography>
+                    <Typography gutterBottom variant="caption">{props.title}</Typography>
+                </CardContent>
+            </Card>
+        </Link>
     );
 }

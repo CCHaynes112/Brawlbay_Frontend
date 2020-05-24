@@ -28,7 +28,7 @@ export default function PlayerCard(props) {
 
     return (
         <Grid item md={3} className={classes.root}>
-            <Link href="/result" underline="none">
+            <Link href={"/players/" + props.playerID} underline="none">
                 <Card elevation={2} className={classes.card}>
                     <CardActionArea>
 
@@ -39,10 +39,10 @@ export default function PlayerCard(props) {
                         />
 
                         <CardContent>
-                            <Typography noWrap={true} gutterBottom variant="h5" component="h2">{props.playerName}</Typography>
-                            <Typography variant="body2" component="p">Rating: {props.playerRating}</Typography>
-                            <Typography variant="body2" component="p">{props.playerRegion}</Typography>
-                            <Typography variant="body2" component="p">Wins: {props.playerWins}</Typography>
+                            <Typography noWrap={true} gutterBottom variant="h5">{props.playerName}</Typography>
+                            <Typography variant="body2">Rating: {props.playerRating}</Typography>
+                            <Typography variant="body2">{props.playerRegion}</Typography>
+                            <Typography variant="body2">Wins: {props.playerWins}</Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>

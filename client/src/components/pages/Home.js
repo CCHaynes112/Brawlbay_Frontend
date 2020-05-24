@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
-import TopEight from '../components/TopPlayers';
-import PlayerSearchBar from '../components/PlayerSearchBar';
+import TopEight from '../TopPlayers';
+import PlayerSearchBar from '../PlayerSearchBar';
 
-import bannerImg from '../components/assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
+import bannerImg from '../assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
 
 const useStyles = makeStyles(theme => ({
     root: {
