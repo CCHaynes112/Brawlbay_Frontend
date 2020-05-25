@@ -51,7 +51,7 @@ export default function PlayerResult(props) {
 
     return (
         <div className={classes.root}>
-            <ContentHeader headerImg={headerImg} />
+            <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">
                 <Grid container item xs={12}>
                     <Paper className={classes.paper}>

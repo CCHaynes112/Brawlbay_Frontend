@@ -113,43 +113,43 @@ function Header(props) {
                 <ListItem button component="a" href="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem button component="a" href="items">
+                <ListItem button component="a" href="/items">
                     <ListItemText primary="Items" />
                 </ListItem>
-                <ListItem button component="a" href="legends">
+                <ListItem button component="a" href="/legends">
                     <ListItemText primary="Legends" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Rankings" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="1v1leaderboard">
+                <ListItem button className={classes.nested} component="a" href="/1v1leaderboard">
                     <ListItemText primary="1v1 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="2v2leaderboard">
+                <ListItem button className={classes.nested} component="a" href="/2v2leaderboard">
                     <ListItemText primary="2v2 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="clanleaderboard">
+                <ListItem button className={classes.nested} component="a" href="/clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="ratings">
+                <ListItem button className={classes.nested} component="a" href="/ratings">
                     <ListItemText primary="Rating Distribution" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Community" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="streams">
+                <ListItem button className={classes.nested} component="a" href="/streams">
                     <ListItemText primary="Streams" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="tournaments">
+                <ListItem button className={classes.nested} component="a" href="/tournaments">
                     <ListItemText primary="Tournaments" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="videos">
+                <ListItem button className={classes.nested} component="a" href="/videos">
                     <ListItemText primary="Videos" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="gifs">
+                <ListItem button className={classes.nested} component="a" href="/gifs">
                     <ListItemText primary="Gifs" />
                 </ListItem>
-                <ListItem button component="a" href="contact">
+                <ListItem button component="a" href="/contact">
                     <ListItemText primary="Contact" />
                 </ListItem>
             </List>

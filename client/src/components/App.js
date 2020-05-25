@@ -14,6 +14,7 @@ import theme from '../theme';
 import Header from './Header';
 import Footer from './Footer';
 import Home from './pages/Home';
+import Contact from './pages/Contact';
 import PlayerResult from './pages/PlayerResult';
 
 export default function App() {
@@ -37,7 +38,7 @@ export default function App() {
             <Route path="/tournaments" />
             <Route path="/videos" />
             <Route path="/gifs" />
-            <Route path="/contact" />
+            <Route path="/contact" component={Contact} />
           </Switch>
         </Header>
         <Footer />

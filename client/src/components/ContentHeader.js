@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
         position: "relative",
         margin: "auto",
         bottom: 50,
+        minWidth: "fit-content",
         width: "40%",
         padding: 5,
         textAlign: "center",
@@ -31,9 +33,13 @@ export default function Home(props) {
     let headerContent;
     if (!props.profile) {
         headerContent = (
-            <Paper className={classes.title}>
-                <Typography variant="h2">Contact</Typography>
-            </Paper>
+            <Grid container>
+                <Grid item xs="12">
+                    <Paper className={classes.title}>
+                        <Typography variant="h2">{props.title}</Typography>
+                    </Paper>
+                </Grid>
+            </Grid>
         );
 
     }
