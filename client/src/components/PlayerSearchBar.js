@@ -1,126 +1,65 @@
 import React, { useEffect, useState } from 'react';
 
-import { useHistory} from "react-router-dom";
-
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import InputBase from '@material-ui/core/InputBase';
 
-import axios from 'axios';
+import PlayersModal from './PlayersModal';
 
 
 const useStyles = makeStyles(theme => ({
-    searchBar: {
-        marginTop: 400,
-        width: "60%",
-    },
     searchLabel: {
         color: theme.palette.text.primary,
     },
-    progressBar: {
-        padding: 20,
-        textAlign: "center"
-    }
+    searchBar: {
+        width: "100%",
+    },
+
+    search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.25),
+        },
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(1),
+            width: 'auto',
+        },
+    },
+    searchIcon: {
+        width: theme.spacing(7),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    inputRoot: {
+        color: 'inherit',
+    },
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 7),
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: 120,
+            '&:focus': {
+                width: 200,
+            },
+        },
+    },
 }));
 
-
-function PlayersModal(props) {
-    const classes = useStyles();
-    const history = useHistory();
-
-    const { playerToSearch, onClose, open } = props;
-
-    const handleEnter = () => {
-        getPlayers();
-    }
-
-    const handleClose = () => {
-        onClose();
-    };
-
-    const handleListItemClick = value => {
-        //onClose(value);
-        history.push("/players/" + value.brawlhalla_id);
-    };
-
-    const [playersArray, setPlayersArray] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [loadError, setLoadError] = useState(null);
-
-
-
-    function getPlayers() {
-        axios.get("http://localhost:5000/api/searchPlayer", {
-            params: {
-                player: playerToSearch
-            }
-        })
-            .then(res => {
-                setIsLoaded(true);
-                setPlayersArray(res.data);
-            })
-            .catch(error => {
-                setLoadError(error.data);
-            })
-    }
-
-    let playersListElement;
-    if (!isLoaded) {
-        playersListElement = (<div className={classes.progressBar}><CircularProgress /></div>)
-    }
-
-    else if (loadError) {
-        playersListElement = (<Typography>Error: {loadError}</Typography>)
-    }
-
-    else {
-        playersListElement = (
-            <List>
-                {
-                    playersArray.map((player, key) => (
-                        <div key={key}>
-                            <ListItem button onClick={() => handleListItemClick(player)}>
-                                <ListItemIcon>
-                                    <AccountCircleIcon fontSize="large" />
-                                </ListItemIcon>
-                                <ListItemText primary={player.name} />
-                            </ListItem>
-                            <Divider />
-                        </div>
-                    ))}
-            </List>
-        )
-    }
-
-    return (
-        <Dialog onEnter={handleEnter} onClose={handleClose} open={open} fullWidth={true} maxWidth="sm" className={classes.modal}>
-            <DialogTitle>Players matching '{playerToSearch}'</DialogTitle>
-            {playersListElement}
-        </Dialog>
-    );
-}
-
-export default function PlayerSearchBar() {
+export default function PlayerSearchBar(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [playerName, setPlayerName] = React.useState("");
@@ -137,23 +76,56 @@ export default function PlayerSearchBar() {
         setOpen(false);
     };
 
+    let searchBarElement;
+
+    if (props.filled) {
+        searchBarElement = (
+            <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                    <SearchIcon />
+                </div>
+                <InputBase
+                    placeholder="Search…"
+                    classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            handleClickOpen();
+                        }
+                    }}
+                    value={playerName} onChange={handleTextChange}
+                />
+            </div>
+        );
+    }
+
+    else {
+        searchBarElement = (
+            <FormControl className={classes.searchBar}>
+                <InputLabel className={classes.searchLabel}>Search...</InputLabel>
+                <Input onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        handleClickOpen();
+                    }
+                }}
+                    value={playerName} onChange={handleTextChange} endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton onClick={handleClickOpen}>
+                                <SearchIcon />
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                />
+            </FormControl>
+        );
+    }
+
     return (
-        <FormControl className={classes.searchBar}>
-            <InputLabel className={classes.searchLabel}>Search...</InputLabel>
-            <Input onKeyDown={(e) => {
-                if(e.key === "Enter") {
-                    handleClickOpen();
-                }
-            }} 
-            value={playerName} onChange={handleTextChange} endAdornment={
-                <InputAdornment position="end">
-                    <IconButton onClick={handleClickOpen}>
-                        <SearchIcon />
-                    </IconButton>
-                </InputAdornment>
-            }
-            />
+        <div>
+            {searchBarElement}
             <PlayersModal playerToSearch={playerName} open={open} onClose={handleClose} />
-        </FormControl>
+        </div>
     );
 }

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 
 import TopEight from '../TopPlayers';
+import ContentHeader from '../ContentHeader';
 import PlayerSearchBar from '../PlayerSearchBar';
 
 import bannerImg from '../assets/img/Brawlbay_Banner_Gradient_lighter.jpg';
@@ -11,19 +13,22 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         marginTop: 70,
-    },
-    paper: {
-        marginTop: 20,
-        marginBottom: 20,
+        minHeight: "100vh",
     },
     banner: {
-        width: "100%",
-        height: 600,
+        marginTop: 20,
+        marginBottom: 20,
         textAlign: "center",
-        backgroundImage: "url(" + bannerImg + ")",
-        backgroundPosition: 'top',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'
+        "& img": {
+            width: "100%",
+        },
+
+    },
+    searchBar: {
+        position: "relative",
+        margin: "auto",
+        top: -100,
+        width: "60%",
     },
 }));
 
@@ -32,13 +37,15 @@ export default function Home() {
 
     return (
         <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <div className={classes.banner}>
-                    <PlayerSearchBar />
-                </div>
-            </Paper>
-
-            <TopEight />
+            <Container maxWidth="xl">
+                <Paper className={classes.banner}>
+                    <img src={bannerImg} />
+                    <div className={classes.searchBar}>
+                        <PlayerSearchBar />
+                    </div>
+                </Paper>
+                <TopEight />
+            </Container>
         </div>
     );
 }

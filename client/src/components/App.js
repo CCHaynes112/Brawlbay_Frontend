@@ -22,7 +22,6 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header>
-        <Container maxWidth="xl" style={{minHeight: "100vh"}}>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/players/:id" component={PlayerResult} />
@@ -40,7 +39,6 @@ export default function App() {
             <Route path="/gifs" />
             <Route path="/contact" />
           </Switch>
-        </Container>
         </Header>
         <Footer />
       </ThemeProvider>

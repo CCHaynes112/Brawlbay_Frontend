@@ -3,13 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 import RankedInfo from '../RankedInfo';
+import ContentHeader from '../ContentHeader';
 import DoughnutChart from '../charts/DoughnutChart';
 
 import rankImgDiamond from '../assets/img/Rankings/Diamond.png';
 import rankImgPlat from '../assets/img/Rankings/Platinum.png';
 import rankImgGold from '../assets/img/Rankings/Gold.png';
+import headerImg from '../assets/img/maps/9 - nAndoWL.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function PlayerResult(props) {
     const classes = useStyles();
-    
+
     const teamList = [
         {
             members: "GuyNum1 + otherGuy",
@@ -48,15 +51,16 @@ export default function PlayerResult(props) {
 
     return (
         <div className={classes.root}>
-            <Grid container item xs={12}>
-                <Paper className={classes.paper}>
-                    <Typography variant="h2">UserName</Typography>
-                    <Typography variant="subtitle1">ID: {props.match.params.id}</Typography>
-                </Paper>
-            </Grid>
+            <ContentHeader headerImg={headerImg} />
+            <Container maxWidth="xl">
+                <Grid container item xs={12}>
+                    <Paper className={classes.paper}>
+                        <Typography variant="h2">UserName</Typography>
+                        <Typography variant="subtitle1">ID: {props.match.params.id}</Typography>
+                    </Paper>
+                </Grid>
 
-            <Grid container>
-                <Grid item sm={6} style={{ marginTop: 15 }}>
+                <Grid container>
                     <RankedInfo
                         playerName="Boomie"
                         type="1v1"
@@ -75,7 +79,7 @@ export default function PlayerResult(props) {
                         teams={teamList}
                     />
                 </Grid>
-            </Grid>
+            </Container>
         </div>
     );
 }

@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
 
     },
     paper: {
+        width: 600,
         height: 250,
     },
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
         padding: 5,
         paddingLeft: 20,
         paddingRight: 20,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
 
     rankImg: {
