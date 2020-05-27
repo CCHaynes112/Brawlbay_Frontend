@@ -8,10 +8,12 @@ import Container from '@material-ui/core/Container';
 import RankedInfo from '../RankedInfo';
 import ContentHeader from '../ContentHeader';
 import DoughnutChart from '../charts/DoughnutChart';
+import PlayerOverviewCard from '../PlayerOverviewCard';
 
 import rankImgDiamond from '../assets/img/Rankings/Diamond.png';
 import rankImgPlat from '../assets/img/Rankings/Platinum.png';
 import rankImgGold from '../assets/img/Rankings/Gold.png';
+import overviewLegendImg from '../assets/img/legend_art/31.png';
 import headerImg from '../assets/img/maps/9 - nAndoWL.png';
 
 const useStyles = makeStyles(theme => ({
@@ -53,31 +55,44 @@ export default function PlayerResult(props) {
         <div className={classes.root}>
             <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">
-                <Grid container item xs={12}>
-                    <Paper className={classes.paper}>
-                        <Typography variant="h2">UserName</Typography>
-                        <Typography variant="subtitle1">ID: {props.match.params.id}</Typography>
-                    </Paper>
-                </Grid>
-
                 <Grid container>
-                    <RankedInfo
-                        playerName="Boomie"
-                        type="1v1"
-                        rankedImg={rankImgDiamond}
-                        region="US-E"
-                        rank="Diamond"
-                        peakRating="2049"
-                        currentRating="2031"
-                        games="904"
-                        wins="300"
-                        losses="788"
-                    />
-
-                    <RankedInfo
-                        type="2v2"
-                        teams={teamList}
-                    />
+                    <Grid item xs="2" container>
+                        <PlayerOverviewCard
+                            legendImg={overviewLegendImg}
+                            level="100"
+                            xp="4719307"
+                            rating="2906"
+                            region="US-E"
+                            games="3041"
+                            wins="485"
+                            losses="1209"
+                        />
+                    </Grid>
+                    <Grid item xs="10" container>
+                        <Grid item xs="12">
+                            <Paper className={classes.paper}>
+                                <Typography variant="h2">UserName</Typography>
+                                <Typography variant="subtitle1">ID: {props.match.params.id}</Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs="6">
+                            <RankedInfo
+                                playerName="Boomie"
+                                type="1v1"
+                                rankedImg={rankImgDiamond}
+                                region="US-E"
+                                rank="Diamond"
+                                peakRating="2049"
+                                currentRating="2031"
+                                games="904"
+                                wins="300"
+                                losses="788"
+                            />
+                        </Grid>
+                        <Grid item xs="6">
+                            <RankedInfo type="2v2" teams={teamList} />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Container>
         </div>

@@ -5,7 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import axios from 'axios';
+
 import PlayerCard from './PlayerCard';
+
 import topCountImg from './assets/img/TopSix.png'
 
 const useStyles = makeStyles(theme => ({
