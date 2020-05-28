@@ -4,11 +4,12 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
 
 import RankedInfo from '../RankedInfo';
 import ContentHeader from '../ContentHeader';
-import DoughnutChart from '../charts/DoughnutChart';
-import PlayerOverviewCard from '../PlayerOverviewCard';
+import PieChart from '../charts/PieChart';
+import PlayerOverviewCard from '../ProfileOverviewCard';
 
 import rankImgDiamond from '../assets/img/Rankings/Diamond.png';
 import rankImgPlat from '../assets/img/Rankings/Platinum.png';
@@ -20,6 +21,24 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         marginTop: 60,
+    },
+    overviewContainer: {
+        marginTop: -200,
+    },
+    overviewItems: {
+        padding: 10,
+        margin: "auto",
+    },
+    rankedContainer: {
+        margin: "auto",
+        marginTop: 0,
+        padding: 10,
+    },
+    winRateChart: {
+        width: 260,
+        height: "fit-content",
+        margin: "auto",
+        paddingBottom: 20,
     },
 }));
 
@@ -56,26 +75,34 @@ export default function PlayerResult(props) {
             <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">
                 <Grid container>
-                    <Grid item xs="2" container>
-                        <PlayerOverviewCard
-                            legendImg={overviewLegendImg}
-                            level="100"
-                            xp="4719307"
-                            rating="2906"
-                            region="US-E"
-                            games="3041"
-                            wins="485"
-                            losses="1209"
-                        />
-                    </Grid>
-                    <Grid item xs="10" container>
-                        <Grid item xs="12">
-                            <Paper className={classes.paper}>
-                                <Typography variant="h2">UserName</Typography>
-                                <Typography variant="subtitle1">ID: {props.match.params.id}</Typography>
+                    <Grid item lg="2" container className={classes.overviewContainer}>
+                        <Grid item lg="12" className={classes.overviewItems}>
+                            <PlayerOverviewCard
+                                playerName="Crass"
+                                id="194542"
+                                legendImg={overviewLegendImg}
+                                level="100"
+                                xp="4719307"
+                                rating="2906"
+                                region="US-E"
+                                games="3041"
+                                wins="485"
+                                losses="1209"
+                            />
+                        </Grid>
+                        <Grid item lg="12" className={classes.overviewItems}>
+                            <Paper className={classes.winRateChart}>
+                                <Typography variant="h6">Total Win/Loss</Typography>
+                                <Divider />
+                                <PieChart
+                                    labels={["Wins", "Losses"]}
+                                    values={[100, 45]}
+                                />
                             </Paper>
                         </Grid>
-                        <Grid item xs="6">
+                    </Grid>
+                    <Grid item lg="10" container>
+                        <Grid item sm="6" className={classes.rankedContainer}>
                             <RankedInfo
                                 playerName="Boomie"
                                 type="1v1"
@@ -89,7 +116,7 @@ export default function PlayerResult(props) {
                                 losses="788"
                             />
                         </Grid>
-                        <Grid item xs="6">
+                        <Grid item sm="6" className={classes.rankedContainer}>
                             <RankedInfo type="2v2" teams={teamList} />
                         </Grid>
                     </Grid>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +17,17 @@ const useStyles = makeStyles(theme => ({
         width: 260,
         textAlign: "left",
         margin: "auto",
+    },
+    cardHeader: {
+        padding: 15,
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    title: {
+        fontSize: 34,
+    },
+    subheader: {
+        color: "black",
     },
     media: {
         width: "100%",
@@ -43,11 +55,20 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function PlayerOverviewCard(props) {
+export default function ProfileOverviewCard(props) {
     const classes = useStyles();
 
     return (
         <Card elevation={2} className={classes.card}>
+            <CardHeader
+                className={classes.cardHeader}
+                classes={{
+                    title: classes.title,
+                    subheader: classes.subheader,
+                }}
+                title={props.playerName}
+                subheader={"ID: " + props.id}
+            />
             <CardMedia
                 className={classes.media}
                 image={props.legendImg}

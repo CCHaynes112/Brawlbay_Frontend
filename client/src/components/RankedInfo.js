@@ -15,8 +15,9 @@ const useStyles = makeStyles(theme => ({
 
     },
     paper: {
-        width: 600,
-        height: 250,
+        width: "100%",
+        height: "15rem",
+        overflow: "auto",
     },
 
     content: {
@@ -25,9 +26,11 @@ const useStyles = makeStyles(theme => ({
         paddingRight: 20,
         justifyContent: "space-between",
     },
-
+    imgContainer: {
+        margin: "auto",
+    },
     rankImg: {
-        width: "60%"
+        width: "100px",
     },
 
     rankFields: {
@@ -38,9 +41,8 @@ const useStyles = makeStyles(theme => ({
         textAlign: "right",
     },
     container2v2: {
-        overflowY: "scroll",
-        height: 250,
-    }
+        height: "15rem",
+    },
 }));
 
 
@@ -63,7 +65,7 @@ export default function RankedInfo(props) {
                 </Grid>
                 <Divider light />
                 <Grid container className={classes.content}>
-                    <Grid item lg={4}>
+                    <Grid className={classes.imgContainer} item lg={4}>
                         <img src={props.rankedImg} alt="Rank" className={classes.rankImg} />
                     </Grid>
                     <Grid item lg={3} className={classes.rankFields}>
@@ -91,9 +93,9 @@ export default function RankedInfo(props) {
     // If Ranked 2v2
     else {
         rankedContent = (
-            <div className={classes.container2v2}>
+            <Paper className={classes.container2v2, classes.paper}>
                 {props.teams.map((team, key) => (
-                    <Paper className={classes.paper} key={key}>
+                    <div key={key}>
                         <Grid container className={classes.content}>
                             <Grid item>
                                 <Typography variant="h6">{team.members}</Typography>
@@ -104,7 +106,7 @@ export default function RankedInfo(props) {
                         </Grid>
                         <Divider light />
                         <Grid container className={classes.content}>
-                            <Grid item lg={4}>
+                            <Grid className={classes.imgContainer} item lg={4}>
                                 <img src={team.rankedImg} alt="Rank" className={classes.rankImg} />
                             </Grid>
                             <Grid item lg={3} className={classes.rankFields}>
@@ -126,9 +128,9 @@ export default function RankedInfo(props) {
                                 <Typography variant="body1">{team.losses}</Typography>
                             </Grid>
                         </Grid>
-                    </Paper>
+                    </div>
                 ))}
-            </div>
+            </Paper>
         );
     }
 

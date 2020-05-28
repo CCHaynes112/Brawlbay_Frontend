@@ -35,20 +35,20 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
     },
     drawer: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             width: drawerWidth,
             flexShrink: 0,
         },
     },
     appBar: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
         },
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             display: 'none',
         },
     },
@@ -176,7 +176,7 @@ function Header(props) {
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer}>
-                <Hidden smUp implementation="css">
+                <Hidden mdUp implementation="css">
                     <Drawer
                         container={container}
                         variant="temporary"
@@ -193,7 +193,7 @@ function Header(props) {
                         {drawer}
                     </Drawer>
                 </Hidden>
-                <Hidden xsDown implementation="css">
+                <Hidden smDown implementation="css">
                     <Drawer
                         classes={{
                             paper: classes.drawerPaper,
