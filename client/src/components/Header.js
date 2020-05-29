@@ -22,6 +22,7 @@ import { useTheme } from '@material-ui/core/styles';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 
 import PlayerSearchBar from "./PlayerSearchBar";
 import ContentHeader from './ContentHeader';
@@ -106,50 +107,50 @@ function Header(props) {
     const drawer = (
         <div>
             <div className={classes.toolbar, classes.logoContainer}>
-                <a href="/" className={classes.logo}><img src={logo} alt="Logo" /></a>
+                <Link href="/" className={classes.logo}><img src={logo} alt="Logo" /></Link>
             </div>
             <Divider />
             <List className={classes.drawerList}>
-                <ListItem button component="a" href="/">
+                <ListItem button component={Link} href="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem button component="a" href="/items">
+                <ListItem button component={Link} href="/items">
                     <ListItemText primary="Items" />
                 </ListItem>
-                <ListItem button component="a" href="/legends">
+                <ListItem button component={Link} href="/legends">
                     <ListItemText primary="Legends" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Rankings" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/1v1leaderboard">
+                <ListItem button className={classes.nested} component={Link} href="/1v1leaderboard">
                     <ListItemText primary="1v1 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/2v2leaderboard">
+                <ListItem button className={classes.nested} component={Link} href="/2v2leaderboard">
                     <ListItemText primary="2v2 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/clanleaderboard">
+                <ListItem button className={classes.nested} component={Link} href="/clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/ratings">
+                <ListItem button className={classes.nested} component={Link} href="/ratings">
                     <ListItemText primary="Rating Distribution" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Community" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/streams">
+                <ListItem button className={classes.nested} component={Link} href="/streams">
                     <ListItemText primary="Streams" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/tournaments">
+                <ListItem button className={classes.nested} component={Link} href="/tournaments">
                     <ListItemText primary="Tournaments" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/videos">
+                <ListItem button className={classes.nested} component={Link} href="/videos">
                     <ListItemText primary="Videos" />
                 </ListItem>
-                <ListItem button className={classes.nested} component="a" href="/gifs">
+                <ListItem button className={classes.nested} component={Link} href="/gifs">
                     <ListItemText primary="Gifs" />
                 </ListItem>
-                <ListItem button component="a" href="/contact">
+                <ListItem button component={Link} href="/contact">
                     <ListItemText primary="Contact" />
                 </ListItem>
             </List>

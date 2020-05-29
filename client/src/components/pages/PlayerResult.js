@@ -10,17 +10,22 @@ import RankedInfo from '../RankedInfo';
 import ContentHeader from '../ContentHeader';
 import PieChart from '../charts/PieChart';
 import PlayerOverviewCard from '../ProfileOverviewCard';
+import ClanCard from '../ClanCard';
 
 import rankImgDiamond from '../assets/img/Rankings/Diamond.png';
 import rankImgPlat from '../assets/img/Rankings/Platinum.png';
 import rankImgGold from '../assets/img/Rankings/Gold.png';
 import overviewLegendImg from '../assets/img/legend_art/31.png';
 import headerImg from '../assets/img/maps/9 - nAndoWL.png';
+import PlayerLegendAccordian from '../PlayerLegendAccordian';
 
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         marginTop: 60,
+    },
+    mainContainer: {
+        alignItems: "flex-start",
     },
     overviewContainer: {
         marginTop: -200,
@@ -35,6 +40,13 @@ const useStyles = makeStyles(theme => ({
         padding: 10,
     },
     winRateChart: {
+        padding: 10,
+        width: 260,
+        height: "fit-content",
+        margin: "auto",
+        paddingBottom: 20,
+    },
+    clanCard: {
         width: 260,
         height: "fit-content",
         margin: "auto",
@@ -74,7 +86,7 @@ export default function PlayerResult(props) {
         <div className={classes.root}>
             <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">
-                <Grid container>
+                <Grid container className={classes.mainContainer}>
                     <Grid item lg="2" container className={classes.overviewContainer}>
                         <Grid item lg="12" className={classes.overviewItems}>
                             <PlayerOverviewCard
@@ -100,6 +112,9 @@ export default function PlayerResult(props) {
                                 />
                             </Paper>
                         </Grid>
+                        <Grid item lg="12" className={classes.overviewItems}>
+                            <ClanCard clanName="Blue Mammoth Games" formedDate="09/14/2013" className={classes.clanCard} />
+                        </Grid>
                     </Grid>
                     <Grid item lg="10" container>
                         <Grid item sm="6" className={classes.rankedContainer}>
@@ -118,6 +133,9 @@ export default function PlayerResult(props) {
                         </Grid>
                         <Grid item sm="6" className={classes.rankedContainer}>
                             <RankedInfo type="2v2" teams={teamList} />
+                        </Grid>
+                        <Grid item sm="12" className={classes.rankedContainer}>
+                            <PlayerLegendAccordian />
                         </Grid>
                     </Grid>
                 </Grid>
