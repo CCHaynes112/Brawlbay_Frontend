@@ -87,8 +87,8 @@ export default function PlayerResult(props) {
             <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">
                 <Grid container className={classes.mainContainer}>
-                    <Grid item lg="2" container className={classes.overviewContainer}>
-                        <Grid item lg="12" className={classes.overviewItems}>
+                    <Grid item lg={2} container className={classes.overviewContainer}>
+                        <Grid item lg={12} className={classes.overviewItems}>
                             <PlayerOverviewCard
                                 playerName="Crass"
                                 id="194542"
@@ -102,7 +102,7 @@ export default function PlayerResult(props) {
                                 losses="1209"
                             />
                         </Grid>
-                        <Grid item lg="12" className={classes.overviewItems}>
+                        <Grid item lg={12} className={classes.overviewItems}>
                             <Paper className={classes.winRateChart}>
                                 <Typography variant="h6">Total Win/Loss</Typography>
                                 <Divider />
@@ -112,12 +112,12 @@ export default function PlayerResult(props) {
                                 />
                             </Paper>
                         </Grid>
-                        <Grid item lg="12" className={classes.overviewItems}>
+                        <Grid item lg={12} className={classes.overviewItems}>
                             <ClanCard clanName="Blue Mammoth Games" formedDate="09/14/2013" className={classes.clanCard} />
                         </Grid>
                     </Grid>
-                    <Grid item lg="10" container>
-                        <Grid item sm="6" className={classes.rankedContainer}>
+                    <Grid item lg={10} container>
+                        <Grid item sm={6} className={classes.rankedContainer}>
                             <RankedInfo
                                 playerName="Boomie"
                                 type="1v1"
@@ -131,10 +131,10 @@ export default function PlayerResult(props) {
                                 losses="788"
                             />
                         </Grid>
-                        <Grid item sm="6" className={classes.rankedContainer}>
+                        <Grid item sm={6} className={classes.rankedContainer}>
                             <RankedInfo type="2v2" teams={teamList} />
                         </Grid>
-                        <Grid item sm="12" className={classes.rankedContainer}>
+                        <Grid item sm={12} className={classes.rankedContainer}>
                             <PlayerLegendAccordian />
                         </Grid>
                     </Grid>

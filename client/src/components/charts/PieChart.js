@@ -1,8 +1,21 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        textAlign: "center",
+    },
+    heading: {
+        marginBottom: 10,
+    },
+}));
 
 export default function PieChart(props) {
+    const classes = useStyles();
     const data = {
         labels: props.labels,
         datasets: [{
@@ -38,8 +51,8 @@ export default function PieChart(props) {
     };
 
     return (
-        <div>
-            <h2>{props.title}</h2>
+        <div className={classes.root}>
+            <Typography variant="subtitle1" className={classes.heading}>{props.title}</Typography>
             <Pie data={data} options={options} />
         </div>
     );
