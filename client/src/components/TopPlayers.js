@@ -39,7 +39,6 @@ export default function TopPlayers() {
             .then(res => {
                 setIsLoaded(true);
                 setPlayerArray(res.data);
-                console.log(res.data)
             })
             .catch(error => {
                 setLoadError(error.data);

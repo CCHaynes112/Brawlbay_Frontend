@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -12,10 +13,8 @@ import PieChart from '../charts/PieChart';
 import PlayerOverviewCard from '../ProfileOverviewCard';
 import ClanCard from '../ClanCard';
 
-import rankImgDiamond from '../assets/img/Rankings/Diamond.png';
 import rankImgPlat from '../assets/img/Rankings/Platinum.png';
 import rankImgGold from '../assets/img/Rankings/Gold.png';
-import overviewLegendImg from '../assets/img/legend_art/31.png';
 import headerImg from '../assets/img/maps/9 - nAndoWL.png';
 import PlayerLegendAccordian from '../PlayerLegendAccordian';
 
@@ -56,6 +55,27 @@ const useStyles = makeStyles(theme => ({
 
 export default function PlayerResult(props) {
     const classes = useStyles();
+    const [playerObj, setPlayerObj] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    let page = (<p>Loading...</p>)
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/player", {
+            params: {
+                player: props.match.params.id
+            }
+        })
+            .then(res => {
+                setPlayerObj(res.data);
+                console.log(res.data)
+                setIsLoaded(true);
+                console.log(`../assets/img/rankings/${res.data.ranked.tier.split(" ")[0]}.png`);
+            })
+            .catch(error => {
+                console.log(error.data);
+            })
+    }, []);
 
     const teamList = [
         {
@@ -82,24 +102,24 @@ export default function PlayerResult(props) {
         },
     ];
 
-    return (
-        <div className={classes.root}>
+    if (isLoaded) {
+        page = (<div className={classes.root}>
             <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">
                 <Grid container className={classes.mainContainer}>
                     <Grid item lg={2} container className={classes.overviewContainer}>
                         <Grid item lg={12} className={classes.overviewItems}>
                             <PlayerOverviewCard
-                                playerName="Crass"
-                                id="194542"
-                                legendImg={overviewLegendImg}
-                                level="100"
-                                xp="4719307"
-                                rating="2906"
-                                region="US-E"
-                                games="3041"
-                                wins="485"
-                                losses="1209"
+                                playerName={playerObj.name}
+                                id={playerObj.brawlhalla_id}
+                                legendImg={require(`../assets/img/legend_art/${playerObj.legends[0].legend_id}.png`)}
+                                level={playerObj.level}
+                                xp={playerObj.xp}
+                                rating={playerObj.ranked.rating}
+                                region={playerObj.ranked.region}
+                                games={playerObj.games}
+                                wins={playerObj.wins}
+                                losses={playerObj.games - playerObj.wins}
                             />
                         </Grid>
                         <Grid item lg={12} className={classes.overviewItems}>
@@ -108,38 +128,45 @@ export default function PlayerResult(props) {
                                 <Divider />
                                 <PieChart
                                     labels={["Wins", "Losses"]}
-                                    values={[100, 45]}
+                                    values={[playerObj.wins, playerObj.games - playerObj.wins]}
                                 />
                             </Paper>
                         </Grid>
-                        <Grid item lg={12} className={classes.overviewItems}>
-                            <ClanCard clanName="Blue Mammoth Games" formedDate="09/14/2013" className={classes.clanCard} />
-                        </Grid>
+                        {playerObj.clan ? (<Grid item lg={12} className={classes.overviewItems}>
+                            <ClanCard clanName={playerObj.clan.clan_name} className={classes.clanCard} />
+                        </Grid>) : null}
                     </Grid>
                     <Grid item lg={10} container>
                         <Grid item sm={6} className={classes.rankedContainer}>
                             <RankedInfo
-                                playerName="Boomie"
+                                playerName={playerObj.ranked.name}
                                 type="1v1"
-                                rankedImg={rankImgDiamond}
-                                region="US-E"
-                                rank="Diamond"
-                                peakRating="2049"
-                                currentRating="2031"
-                                games="904"
-                                wins="300"
-                                losses="788"
+                                rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(" ")[0]}.png`)}
+                                region={playerObj.region}
+                                rank={playerObj.ranked.tier}
+                                peakRating={playerObj.ranked.peak_rating}
+                                currentRating={playerObj.ranked.rating}
+                                games={playerObj.ranked.games}
+                                wins={playerObj.ranked.wins}
+                                losses={playerObj.ranked.games - playerObj.ranked.wins}
                             />
                         </Grid>
                         <Grid item sm={6} className={classes.rankedContainer}>
-                            <RankedInfo type="2v2" teams={teamList} />
+                            {playerObj.ranked["2v2"].length ? (<RankedInfo type="2v2" teams={playerObj.ranked["2v2"]} />) : (<p>No 2v2 ranked data</p>)}
+                            
                         </Grid>
                         <Grid item sm={12} className={classes.rankedContainer}>
-                            <PlayerLegendAccordian />
+                            <PlayerLegendAccordian legends={playerObj.legends} />
                         </Grid>
                     </Grid>
                 </Grid>
             </Container>
+        </div>)
+    }
+
+    return (
+        <div>
+            {page}
         </div>
     );
 }

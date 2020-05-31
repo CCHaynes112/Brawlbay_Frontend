@@ -98,7 +98,7 @@ export default function RankedInfo(props) {
                     <div key={key}>
                         <Grid container className={classes.content}>
                             <Grid item>
-                                <Typography variant="h6">{team.members}</Typography>
+                                <Typography variant="h6">{team.teamname}</Typography>
                             </Grid>
                             <Grid item>
                                 <Typography variant="subtitle1">Rank {props.type}</Typography>
@@ -107,7 +107,7 @@ export default function RankedInfo(props) {
                         <Divider light />
                         <Grid container className={classes.content}>
                             <Grid className={classes.imgContainer} item lg={4}>
-                                <img src={team.rankedImg} alt="Rank" className={classes.rankImg} />
+                                <img src={require(`./assets/img/Rankings/${team.tier.split(" ")[0]}.png`)} alt="Rank" className={classes.rankImg} />
                             </Grid>
                             <Grid item lg={3} className={classes.rankFields}>
                                 <Typography variant="body1">Region</Typography>
@@ -120,12 +120,12 @@ export default function RankedInfo(props) {
                             </Grid>
                             <Grid item lg={5} className={classes.rankValues}>
                                 <Typography variant="body1">{team.region}</Typography>
-                                <Typography variant="body1">{team.rank}</Typography>
-                                <Typography variant="body1">{team.peakRating}</Typography>
-                                <Typography variant="body1">{team.currentRating}</Typography>
+                                <Typography variant="body1">{team.tier}</Typography>
+                                <Typography variant="body1">{team.peak_rating}</Typography>
+                                <Typography variant="body1">{team.rating}</Typography>
                                 <Typography variant="body1">{team.games}</Typography>
                                 <Typography variant="body1">{team.wins}</Typography>
-                                <Typography variant="body1">{team.losses}</Typography>
+                                <Typography variant="body1">{team.games - team.wins}</Typography>
                             </Grid>
                         </Grid>
                     </div>

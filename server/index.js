@@ -33,13 +33,29 @@ app.get('/api/topRanked', (req, res) => {
             res.send(axRes.data.slice(0, 6));
         })
         .catch(error => {
-            console.log("Error: " + error)
             res.send("Error loading top ranked")
         });
 });
 
 app.get('/api/searchPlayer', (req, res) => {
     getUsers(req, res);
+});
+
+app.get('/api/player', (req, res) => {
+    var playerID = req.query.player;
+    var playerObj;
+    axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
+        .then(axRes => {
+            playerObj = axRes.data;
+            axios.get("https://api.brawlhalla.com/player/" + playerID + '/ranked?api_key=' + brawlhallaAPIKey)
+                .then(axRes => {
+                    playerObj["ranked"] = axRes.data;
+                    res.send(playerObj);
+                })
+        })
+        .catch(error => {
+            res.send("Error loading player data for player: " + playerID);
+        });
 });
 
 app.listen(5000, () => {
@@ -66,8 +82,7 @@ function getPlayerByName(req, res, playerID) {
             res.send(axRes.data);
         })
         .catch(error => {
-            console.log("Error: " + error)
-            res.send("Error loading player data for player: " + playerID)
+            res.send("Error loading player data for player: " + playerID);
         });
 }
 
@@ -75,19 +90,14 @@ function getPlayerByID(req, res, playerID) {
     // Try to find user by Brawlhalla ID
     axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
         .then(axRes => {
-            res.send([axRes.data]);
+            res.send(axRes.data);
         })
         .catch(error => {
             // Couldn't find user, Try to find user by Steam ID
             axios.get("https://api.brawlhalla.com/search?steamid=" + playerID + '&api_key=' + brawlhallaAPIKey)
                 .then(axRes => {
-                    res.send([axRes.data]);
+                    res.send(axRes.data);
                 })
-            console.log("Error: " + error)
-            res.send("Error loading player data for player: " + playerID);
+                res.send("Error loading player data for player: " + playerID);
         });
-}
-
-function getPlayerBySteamID(playerID) {
-
 }
