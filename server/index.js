@@ -28,9 +28,10 @@ app.get('/api/test', (req, res) => {
 });
 
 app.get('/api/topRanked', (req, res) => {
+    var playerCount = req.query.playerCount || 50;
     axios.get("https://api.brawlhalla.com/rankings/1v1/all/1?api_key=" + brawlhallaAPIKey)
         .then(axRes => {
-            res.send(axRes.data.slice(0, 6));
+            res.send(axRes.data.slice(0, playerCount));
         })
         .catch(error => {
             res.send("Error loading top ranked")

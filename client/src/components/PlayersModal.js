@@ -57,7 +57,12 @@ export default function PlayersModal(props) {
         })
             .then(res => {
                 setIsLoaded(true);
-                setPlayersArray(res.data);
+                if (Array.isArray(res.data)) {
+                    setPlayersArray(res.data);
+                }
+                else {
+                    setPlayersArray([res.data]);
+                }
             })
             .catch(error => {
                 setLoadError(error.data);
@@ -84,7 +89,7 @@ export default function PlayersModal(props) {
                                     <AccountCircleIcon fontSize="large" />
                                 </ListItemIcon>
                                 <ListItemText primary={player.name} />
-                                <ListItemText primary={player.region} style={{textAlign: "right"}} />
+                                <ListItemText primary={player.region} style={{ textAlign: "right" }} />
                             </ListItem>
                             <Divider />
                         </div>

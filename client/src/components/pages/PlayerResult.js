@@ -7,7 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 
-import RankedInfo from '../RankedInfo';
+import RankedCard1v1 from '../RankedCard1v1';
+import RankedCard2v2 from '../RankedCard2v2';
 import ContentHeader from '../ContentHeader';
 import PieChart from '../charts/PieChart';
 import PlayerOverviewCard from '../ProfileOverviewCard';
@@ -77,31 +78,6 @@ export default function PlayerResult(props) {
             })
     }, []);
 
-    const teamList = [
-        {
-            members: "GuyNum1 + otherGuy",
-            rankedImg: rankImgGold,
-            region: "US-W",
-            rank: "Gold",
-            peakRating: "1000",
-            currentRating: "999",
-            games: "5",
-            wins: "3",
-            losses: "2",
-        },
-        {
-            members: "Guy1 + Dude2",
-            rankedImg: rankImgPlat,
-            region: "US-E",
-            rank: "Platinum",
-            peakRating: "1945",
-            currentRating: "1901",
-            games: "354",
-            wins: "111",
-            losses: "213",
-        },
-    ];
-
     if (isLoaded) {
         page = (<div className={classes.root}>
             <ContentHeader profile headerImg={headerImg} />
@@ -138,11 +114,11 @@ export default function PlayerResult(props) {
                     </Grid>
                     <Grid item lg={10} container>
                         <Grid item sm={6} className={classes.rankedContainer}>
-                            <RankedInfo
-                                playerName={playerObj.ranked.name}
+                            <RankedCard1v1
                                 type="1v1"
+                                playerName={playerObj.ranked.name}
                                 rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(" ")[0]}.png`)}
-                                region={playerObj.region}
+                                region={playerObj.ranked.region}
                                 rank={playerObj.ranked.tier}
                                 peakRating={playerObj.ranked.peak_rating}
                                 currentRating={playerObj.ranked.rating}
@@ -152,8 +128,8 @@ export default function PlayerResult(props) {
                             />
                         </Grid>
                         <Grid item sm={6} className={classes.rankedContainer}>
-                            {playerObj.ranked["2v2"].length ? (<RankedInfo type="2v2" teams={playerObj.ranked["2v2"]} />) : (<p>No 2v2 ranked data</p>)}
-                            
+                            <RankedCard2v2 teams={playerObj.ranked["2v2"]} />
+
                         </Grid>
                         <Grid item sm={12} className={classes.rankedContainer}>
                             <PlayerLegendAccordian legends={playerObj.legends} />

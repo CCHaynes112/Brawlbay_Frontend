@@ -16,6 +16,7 @@ import Footer from './Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import PlayerResult from './pages/PlayerResult';
+import Ranked1v1Leaderboard from './pages/Ranked1v1Leaderboard';
 
 export default function App() {
   return (
@@ -30,7 +31,7 @@ export default function App() {
             <Route path="/items" />
             <Route path="/legends" />
             <Route path="/legends/:id" />
-            <Route path="/1v1leaderboard" />
+            <Route path="/1v1leaderboard" component={Ranked1v1Leaderboard} />
             <Route path="/2v2leaderboard" />
             <Route path="/clanleaderboard" />
             <Route path="/ratings" />

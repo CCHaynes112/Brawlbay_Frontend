@@ -35,7 +35,11 @@ export default function TopPlayers() {
     let playersElement;
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/topRanked")
+        axios.get("http://localhost:5000/api/topRanked", {
+            params: {
+                playerCount: 6
+            }
+        })
             .then(res => {
                 setIsLoaded(true);
                 setPlayerArray(res.data);
