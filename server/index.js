@@ -29,7 +29,9 @@ app.get('/api/test', (req, res) => {
 
 app.get('/api/topRanked', (req, res) => {
     var playerCount = req.query.playerCount || 50;
-    axios.get("https://api.brawlhalla.com/rankings/1v1/all/1?api_key=" + brawlhallaAPIKey)
+    var pageNumber = req.query.pageNumber || 1;
+    var type = req.query.type || "1v1";
+    axios.get("https://api.brawlhalla.com/rankings/" + type + "/all/" + pageNumber + "?api_key=" + brawlhallaAPIKey)
         .then(axRes => {
             res.send(axRes.data.slice(0, playerCount));
         })
@@ -56,6 +58,17 @@ app.get('/api/player', (req, res) => {
         })
         .catch(error => {
             res.send("Error loading player data for player: " + playerID);
+        });
+});
+
+app.get('/api/clan', (req, res) => {
+    var clanID = req.query.clan;
+    axios.get("https://api.brawlhalla.com/clan/" + clanID + '/?api_key=' + brawlhallaAPIKey)
+        .then(axRes => {
+            res.send(axRes.data);
+        })
+        .catch(error => {
+            res.send("Error loading player data for clan: " + clanID);
         });
 });
 

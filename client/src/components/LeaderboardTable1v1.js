@@ -6,7 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import theme from '../theme';
 
 import axios from 'axios';
@@ -23,19 +26,25 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SimpleTable() {
+export default function LeaderboardTable1v1() {
     const classes = useStyles();
+    const [pageNumber, setPageNumber] = useState(1);
     const [playerArray, setPlayerArray] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/topRanked")
+        axios.get("http://localhost:5000/api/topRanked", {
+            params: {
+                type: "1v1",
+                pageNumber: pageNumber
+            }
+        })
             .then(res => {
                 setPlayerArray(res.data);
             })
             .catch(error => {
                 console.log(error.data);
             })
-    }, []);
+    }, [pageNumber]);
 
     return (
         <TableContainer component={Paper}>
@@ -52,10 +61,12 @@ export default function SimpleTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {playerArray.map((player) => (
-                        <TableRow key={player.rank}>
+                    {playerArray.map((player, key) => (
+                        <TableRow key={key}>
                             <TableCell>{player.rank}</TableCell>
-                            <TableCell>{player.name}</TableCell>
+                            <TableCell>
+                                <Link href={"/players/" + player.brawlhalla_id}>{player.name}</Link>
+                            </TableCell>
                             <TableCell>{Math.round((player.wins / player.games) * 100) + "%"}</TableCell>
                             <TableCell>{player.rating}</TableCell>
                             <TableCell>{player.peak_rating}</TableCell>
@@ -65,6 +76,19 @@ export default function SimpleTable() {
                     ))}
                 </TableBody>
             </Table>
+            <div style={{ float: "right" }}>
+                {
+                    pageNumber > 1 ?
+                        (
+                            <span>
+                                <Button onClick={() => { setPageNumber(1) }} color="primary">Top</Button>
+                                <Button onClick={() => { setPageNumber(pageNumber - 1) }} color="primary">Previous</Button>
+                            </span>
+                        )
+                        : null
+                }
+                <Button onClick={() => { setPageNumber(pageNumber + 1) }} color="primary">Next</Button>
+            </div>
         </TableContainer>
     );
 }

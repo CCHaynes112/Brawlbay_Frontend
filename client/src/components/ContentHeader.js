@@ -34,7 +34,7 @@ export default function Home(props) {
     if (!props.profile) {
         headerContent = (
             <Grid container>
-                <Grid item xs="12">
+                <Grid item xs={12}>
                     <Paper className={classes.title}>
                         <Typography variant="h2">{props.title}</Typography>
                     </Paper>

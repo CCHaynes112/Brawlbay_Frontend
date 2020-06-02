@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import ContentHeader from '../ContentHeader';
-import LeaderboardTable from '../LeaderboardTable1v1';
+import LeaderboardTable from '../LeaderboardTable2v2';
 
 import headerImg from '../assets/img/maps/Stadium.jpg';
 
@@ -22,12 +22,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Ranked1v1Leaderboard() {
+export default function Ranked2v2Leaderboard() {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <ContentHeader title="Ranked 1v1 Leaderboards" headerImg={headerImg} />
+            <ContentHeader title="Ranked 2v2 Leaderboards" headerImg={headerImg} />
             <Container className={classes.container} maxWidth="xl">
                 <LeaderboardTable  />
             </Container>

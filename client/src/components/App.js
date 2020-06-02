@@ -16,7 +16,9 @@ import Footer from './Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import PlayerResult from './pages/PlayerResult';
+import ClanResult from './pages/ClanResult';
 import Ranked1v1Leaderboard from './pages/Ranked1v1Leaderboard';
+import Ranked2v2Leaderboard from './pages/Ranked2v2Leaderboard';
 
 export default function App() {
   return (
@@ -27,12 +29,12 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/players/:id" component={PlayerResult} />
-            <Route path="/clans/:id" />
+            <Route path="/clans/:id" component={ClanResult} />
             <Route path="/items" />
             <Route path="/legends" />
             <Route path="/legends/:id" />
             <Route path="/1v1leaderboard" component={Ranked1v1Leaderboard} />
-            <Route path="/2v2leaderboard" />
+            <Route path="/2v2leaderboard" component={Ranked2v2Leaderboard} />
             <Route path="/clanleaderboard" />
             <Route path="/ratings" />
             <Route path="/streams" />

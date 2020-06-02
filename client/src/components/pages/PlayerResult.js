@@ -11,12 +11,10 @@ import RankedCard1v1 from '../RankedCard1v1';
 import RankedCard2v2 from '../RankedCard2v2';
 import ContentHeader from '../ContentHeader';
 import PieChart from '../charts/PieChart';
-import PlayerOverviewCard from '../ProfileOverviewCard';
+import PlayerOverviewCard from '../PlayerOverviewCard';
 import ClanCard from '../ClanCard';
 
-import rankImgPlat from '../assets/img/Rankings/Platinum.png';
-import rankImgGold from '../assets/img/Rankings/Gold.png';
-import headerImg from '../assets/img/maps/9 - nAndoWL.png';
+import headerImg from '../assets/img/maps/Ship.png';
 import PlayerLegendAccordian from '../PlayerLegendAccordian';
 
 const useStyles = makeStyles(theme => ({
@@ -69,9 +67,7 @@ export default function PlayerResult(props) {
         })
             .then(res => {
                 setPlayerObj(res.data);
-                console.log(res.data)
                 setIsLoaded(true);
-                console.log(`../assets/img/rankings/${res.data.ranked.tier.split(" ")[0]}.png`);
             })
             .catch(error => {
                 console.log(error.data);
