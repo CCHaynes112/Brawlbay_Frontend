@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import ContentHeader from '../ContentHeader';
 import PieChart from '../charts/PieChart';
 import ClanOverviewCard from '../ClanOverviewCard';
+import PlayerCard from '../PlayerCard';
 
 import headerImg from '../assets/img/maps/ShipPirate.jpg';
 
@@ -52,8 +53,24 @@ export default function ClanResult(props) {
     const classes = useStyles();
     const [clanObj, setClanObj] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
+    const [top4Players, setTop4Players] = useState([]);
 
     let page = (<p>Loading...</p>)
+
+    function getTop4PlayerIDs(arr) {
+        let ids = [];
+        if (arr.clan.length > 4) {
+            arr.clan.slice(0, 4).forEach(player => {
+                ids.push(player.brawlhalla_id);
+            })
+        }
+        else {
+            arr.clan.forEach(player => {
+                ids.push(player.brawlhalla_id);
+            })
+        }
+        return ids;
+    }
 
     useEffect(() => {
         axios.get("http://localhost:5000/api/clan", {
@@ -62,10 +79,26 @@ export default function ClanResult(props) {
             }
         })
             .then(res => {
+                let ids = getTop4PlayerIDs(res.data);
                 setClanObj(res.data);
-                setIsLoaded(true);
+                axios.get("http://localhost:5000/api/players", {
+                    params: {
+                        players: ids
+                    }
+                })
+                    .then(res => {
+                        console.log("Got players!");
+                        console.log(res.data);
+                        setTop4Players(res.data);
+                        setIsLoaded(true);
+                    })
+                    .catch(error => {
+                        console.log("Error");
+                        console.log(error.data);
+                    })
             })
             .catch(error => {
+                console.log("Error");
                 console.log(error.data);
             })
     }, []);
@@ -83,6 +116,21 @@ export default function ClanResult(props) {
                                 xp={clanObj.clan_xp}
                             />
                         </Grid>
+                    </Grid>
+                    <Grid item lg={10} container>
+                        {
+                            top4Players.map((player, key) =>
+                                <PlayerCard
+                                    key={key}
+                                    playerID={player.brawlhalla_id}
+                                    legendImg={require(`../assets/img/legend_art/${player.legends[0].legend_id}.png`)}
+                                    playerName={player.name}
+                                    playerRating={player.rating}
+                                    playerWins={player.wins}
+                                />
+                            )
+                        }
+
                     </Grid>
                 </Grid>
             </Container>

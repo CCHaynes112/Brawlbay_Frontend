@@ -105,7 +105,7 @@ export default function PlayerResult(props) {
                             </Paper>
                         </Grid>
                         {playerObj.clan ? (<Grid item lg={12} className={classes.overviewItems}>
-                            <ClanCard clanName={playerObj.clan.clan_name} className={classes.clanCard} />
+                            <ClanCard clanID={playerObj.clan.clan_id} clanName={playerObj.clan.clan_name} className={classes.clanCard} />
                         </Grid>) : null}
                     </Grid>
                     <Grid item lg={10} container>

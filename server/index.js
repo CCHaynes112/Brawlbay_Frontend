@@ -61,6 +61,30 @@ app.get('/api/player', (req, res) => {
         });
 });
 
+app.get('/api/players', (req, res) => {
+    var playerIDs = req.query.players;
+
+    //Define array promises
+    let promises = [];
+    playerIDs.forEach(id => {
+        promises.push(
+            axios.get("https://api.brawlhalla.com/player/" + id + '/stats?api_key=' + brawlhallaAPIKey)
+        );
+    })
+
+    Promise.all(promises)
+        .then(responses => {
+            let data = [];
+            responses.forEach(response => {
+                data.push(response.data);
+            })
+            res.send(data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+});
+
 app.get('/api/clan', (req, res) => {
     var clanID = req.query.clan;
     axios.get("https://api.brawlhalla.com/clan/" + clanID + '/?api_key=' + brawlhallaAPIKey)
@@ -112,6 +136,6 @@ function getPlayerByID(req, res, playerID) {
                 .then(axRes => {
                     res.send(axRes.data);
                 })
-                res.send("Error loading player data for player: " + playerID);
+            res.send("Error loading player data for player: " + playerID);
         });
 }
