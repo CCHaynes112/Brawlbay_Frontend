@@ -47,7 +47,6 @@ export default function ClanCard(props) {
                     <Typography variant="h6">Clan</Typography>
                     <Divider light />
                     <Typography variant="body1">{props.clanName}</Typography>
-                    <Typography variant="body1">{"Formed: " + props.formedDate}</Typography>
                 </CardContent>
             </Card>
         </Link>

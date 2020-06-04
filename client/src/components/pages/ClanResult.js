@@ -11,6 +11,7 @@ import ContentHeader from '../ContentHeader';
 import PieChart from '../charts/PieChart';
 import ClanOverviewCard from '../ClanOverviewCard';
 import PlayerCard from '../PlayerCard';
+import LeaderboardTableClan from '../LeaderboardTableClan';
 
 import headerImg from '../assets/img/maps/ShipPirate.jpg';
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
     },
     mainContainer: {
         alignItems: "flex-start",
+        marginBottom: 10,
     },
     overviewContainer: {
         marginTop: -200,
@@ -29,23 +31,13 @@ const useStyles = makeStyles(theme => ({
         padding: 10,
         margin: "auto",
     },
-    rankedContainer: {
-        margin: "auto",
-        marginTop: 0,
-        padding: 10,
+    topPlayersContainer: {
+        marginTop: 10,
+        justifyContent: "space-evenly"
     },
-    winRateChart: {
-        padding: 10,
-        width: 260,
-        height: "fit-content",
-        margin: "auto",
-        paddingBottom: 20,
-    },
-    clanCard: {
-        width: 260,
-        height: "fit-content",
-        margin: "auto",
-        paddingBottom: 20,
+    clanMembers: {
+        marginTop: 10,
+        justifyContent: "space-evenly"
     },
 }));
 
@@ -60,7 +52,7 @@ export default function ClanResult(props) {
     function getTop4PlayerIDs(arr) {
         let ids = [];
         if (arr.clan.length > 4) {
-            arr.clan.slice(0, 4).forEach(player => {
+            arr.clan.slice(0, 5).forEach(player => {
                 ids.push(player.brawlhalla_id);
             })
         }
@@ -106,8 +98,8 @@ export default function ClanResult(props) {
     if (isLoaded) {
         page = (<div className={classes.root}>
             <ContentHeader profile headerImg={headerImg} />
-            <Container maxWidth="xl">
-                <Grid container className={classes.mainContainer}>
+            <Container maxWidth="xl" className={classes.mainContainer}>
+                <Grid container>
                     <Grid item lg={2} container className={classes.overviewContainer}>
                         <Grid item lg={12} className={classes.overviewItems}>
                             <ClanOverviewCard
@@ -117,20 +109,23 @@ export default function ClanResult(props) {
                             />
                         </Grid>
                     </Grid>
-                    <Grid item lg={10} container>
+                    <Grid item lg={10} container className={classes.topPlayersContainer}>
                         {
                             top4Players.map((player, key) =>
-                                <PlayerCard
-                                    key={key}
-                                    playerID={player.brawlhalla_id}
-                                    legendImg={require(`../assets/img/legend_art/${player.legends[0].legend_id}.png`)}
-                                    playerName={player.name}
-                                    playerRating={player.rating}
-                                    playerWins={player.wins}
-                                />
+                                <Grid item key={key}>
+                                    <PlayerCard
+                                        playerID={player.brawlhalla_id}
+                                        legendImg={require(`../assets/img/legend_art/${player.legends[0].legend_id}.png`)}
+                                        playerName={player.name}
+                                        playerRating={player.rating}
+                                        playerWins={player.wins}
+                                    />
+                                </Grid>
                             )
                         }
-
+                    </Grid>
+                    <Grid item lg={12} container className={classes.topPlayersContainer}>
+                        <LeaderboardTableClan clan={clanObj.clan} className={classes.clanMembers} />
                     </Grid>
                 </Grid>
             </Container>

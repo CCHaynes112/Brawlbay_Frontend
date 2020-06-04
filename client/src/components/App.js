@@ -19,6 +19,7 @@ import PlayerResult from './pages/PlayerResult';
 import ClanResult from './pages/ClanResult';
 import Ranked1v1Leaderboard from './pages/Ranked1v1Leaderboard';
 import Ranked2v2Leaderboard from './pages/Ranked2v2Leaderboard';
+import PageNotFound from './pages/PageNotFound';
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
             <Route path="/videos" />
             <Route path="/gifs" />
             <Route path="/contact" component={Contact} />
+            <Route page="/404" component={PageNotFound} />
           </Switch>
         </Header>
         <Footer />

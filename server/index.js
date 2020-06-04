@@ -50,13 +50,19 @@ app.get('/api/player', (req, res) => {
     axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
         .then(axRes => {
             playerObj = axRes.data;
-            axios.get("https://api.brawlhalla.com/player/" + playerID + '/ranked?api_key=' + brawlhallaAPIKey)
+            if (Object.keys(playerObj).length > 0) {
+                axios.get("https://api.brawlhalla.com/player/" + playerID + '/ranked?api_key=' + brawlhallaAPIKey)
                 .then(axRes => {
                     playerObj["ranked"] = axRes.data;
                     res.send(playerObj);
                 })
+            }
+            else {
+                throw "Player Not Found";
+            }
         })
         .catch(error => {
+            res.status(404).end();
             res.send("Error loading player data for player: " + playerID);
         });
 });

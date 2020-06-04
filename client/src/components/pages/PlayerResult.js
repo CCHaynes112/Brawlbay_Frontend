@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Redirect from 'react-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -56,6 +57,7 @@ export default function PlayerResult(props) {
     const classes = useStyles();
     const [playerObj, setPlayerObj] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
+    const [failed, setFailed] = useState(false);
 
     let page = (<p>Loading...</p>)
 
@@ -66,15 +68,29 @@ export default function PlayerResult(props) {
             }
         })
             .then(res => {
+                console.log(res);
+                if (res.status == 404) {
+                    console.log("Not Found!");
+                }
+                console.log("1");
+                console.log(res.data);
+                console.log("2");
                 setPlayerObj(res.data);
+                console.log("3");
                 setIsLoaded(true);
+                console.log("4");
             })
             .catch(error => {
                 console.log(error.data);
+                setFailed(true);
             })
     }, []);
 
-    if (isLoaded) {
+    if (failed) {
+        page = (<Redirect to="/404" />)
+    }
+
+    else if (isLoaded) {
         page = (<div className={classes.root}>
             <ContentHeader profile headerImg={headerImg} />
             <Container maxWidth="xl">

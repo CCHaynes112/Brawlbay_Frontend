@@ -114,12 +114,12 @@ function Header(props) {
                 <ListItem button component={Link} href="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem button component={Link} href="/items">
+                {/* <ListItem button component={Link} href="/items">
                     <ListItemText primary="Items" />
                 </ListItem>
                 <ListItem button component={Link} href="/legends">
                     <ListItemText primary="Legends" />
-                </ListItem>
+                </ListItem> */}
                 <ListItem>
                     <ListItemText primary="Rankings" />
                 </ListItem>
@@ -129,7 +129,7 @@ function Header(props) {
                 <ListItem button className={classes.nested} component={Link} href="/2v2leaderboard">
                     <ListItemText primary="2v2 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/clanleaderboard">
+                {/* <ListItem button className={classes.nested} component={Link} href="/clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
                 </ListItem>
                 <ListItem button className={classes.nested} component={Link} href="/ratings">
@@ -149,7 +149,7 @@ function Header(props) {
                 </ListItem>
                 <ListItem button className={classes.nested} component={Link} href="/gifs">
                     <ListItemText primary="Gifs" />
-                </ListItem>
+                </ListItem> */}
                 <ListItem button component={Link} href="/contact">
                     <ListItemText primary="Contact" />
                 </ListItem>
