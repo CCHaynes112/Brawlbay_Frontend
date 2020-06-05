@@ -4,9 +4,11 @@ This service is meant to interface with the brawlhalla api, and provide endpoint
 
 ## Getting Started
 
-git clone https://github.com/CCHaynes112/brawlhalla_service.git
-npm install
-npm start
+* git clone https://github.com/CCHaynes112/brawlhalla_service.git
+
+* npm install
+
+* npm start
 
 ### Prerequisites
 
