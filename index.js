@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const http = require('http');
+var { brawlhallaAPIKey } = require('./secrets')
 
 const app = express();
-var { brawlhallaAPIKey } = require('./secrets')
+var isProduction = process.env.NODE_ENV === 'production';
 
 
 //For production use:
@@ -18,130 +20,51 @@ var { brawlhallaAPIKey } = require('./secrets')
 //     }
 // }
 //app.use(cors(corsOptions));
-
 app.use(cors());
+app.use(require('morgan')('dev'));
 
-app.get('/api/test', (req, res) => {
-    res.send({
-        "test": 123
+app.use(require('./routes'));
+
+// Taken from https://github.com/gothinkster/node-express-realworld-example-app/blob/master/app.js
+/// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+  
+  /// error handlers
+  
+  // development error handler
+  // will print stacktrace
+  if (!isProduction) {
+    app.use(function(err, req, res, next) {
+      console.log(err.stack);
+  
+      res.status(err.status || 500);
+  
+      res.json({'errors': {
+        message: err.message,
+        error: err
+      }});
     });
-});
+  }
+  
+  // production error handler
+  // no stacktraces leaked to user
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({'errors': {
+      message: err.message,
+      error: {}
+    }});
+  });
+  
+  // finally, let's start our server...
+  var server = app.listen( process.env.PORT || 3000, function(){
+    console.log('Listening on port ' + server.address().port);
+  });
 
-app.get('/api/topRanked', (req, res) => {
-    var playerCount = req.query.playerCount || 50;
-    var pageNumber = req.query.pageNumber || 1;
-    var type = req.query.type || "1v1";
-    axios.get("https://api.brawlhalla.com/rankings/" + type + "/all/" + pageNumber + "?api_key=" + brawlhallaAPIKey)
-        .then(axRes => {
-            res.send(axRes.data.slice(0, playerCount));
-        })
-        .catch(error => {
-            res.send("Error loading top ranked")
-        });
-});
-
-app.get('/api/searchPlayer', (req, res) => {
-    getUsers(req, res);
-});
-
-app.get('/api/player', (req, res) => {
-    var playerID = req.query.player;
-    var playerObj;
-    axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
-        .then(axRes => {
-            playerObj = axRes.data;
-            if (Object.keys(playerObj).length > 0) {
-                axios.get("https://api.brawlhalla.com/player/" + playerID + '/ranked?api_key=' + brawlhallaAPIKey)
-                .then(axRes => {
-                    playerObj["ranked"] = axRes.data;
-                    res.send(playerObj);
-                })
-            }
-            else {
-                throw "Player Not Found";
-            }
-        })
-        .catch(error => {
-            res.status(404).end();
-            res.send("Error loading player data for player: " + playerID);
-        });
-});
-
-app.get('/api/players', (req, res) => {
-    var playerIDs = req.query.players;
-
-    //Define array promises
-    let promises = [];
-    playerIDs.forEach(id => {
-        promises.push(
-            axios.get("https://api.brawlhalla.com/player/" + id + '/stats?api_key=' + brawlhallaAPIKey)
-        );
-    })
-
-    Promise.all(promises)
-        .then(responses => {
-            let data = [];
-            responses.forEach(response => {
-                data.push(response.data);
-            })
-            res.send(data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-});
-
-app.get('/api/clan', (req, res) => {
-    var clanID = req.query.clan;
-    axios.get("https://api.brawlhalla.com/clan/" + clanID + '/?api_key=' + brawlhallaAPIKey)
-        .then(axRes => {
-            res.send(axRes.data);
-        })
-        .catch(error => {
-            res.send("Error loading player data for clan: " + clanID);
-        });
-});
-
-app.listen(5000, () => {
+  app.listen(5000, () => {
     console.log("Listening on port 5000");
 });
-
-
-function getUsers(req, res) {
-    var playerID = req.query.player;
-
-    if (playerID.match(/[a-zA-Z]/) != null) {
-        // There are letters, can't be an id
-        getPlayerByName(req, res, playerID);
-    }
-    else {
-        // Input is only numbers
-        getPlayerByID(req, res, playerID);
-    }
-}
-
-function getPlayerByName(req, res, playerID) {
-    axios.get("https://api.brawlhalla.com/rankings/1v1/all/1?api_key=" + brawlhallaAPIKey + "&name=" + playerID)
-        .then(axRes => {
-            res.send(axRes.data);
-        })
-        .catch(error => {
-            res.send("Error loading player data for player: " + playerID);
-        });
-}
-
-function getPlayerByID(req, res, playerID) {
-    // Try to find user by Brawlhalla ID
-    axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
-        .then(axRes => {
-            res.send(axRes.data);
-        })
-        .catch(error => {
-            // Couldn't find user, Try to find user by Steam ID
-            axios.get("https://api.brawlhalla.com/search?steamid=" + playerID + '&api_key=' + brawlhallaAPIKey)
-                .then(axRes => {
-                    res.send(axRes.data);
-                })
-            res.send("Error loading player data for player: " + playerID);
-        });
-}
