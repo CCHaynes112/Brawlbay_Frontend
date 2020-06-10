@@ -1,6 +1,10 @@
 var router = require('express').Router();
+const axios = require('axios');
 
-router.get('/api/topRanked', (req, res) => {
+var { brawlhallaAPIKey } = require('../../secrets')
+
+
+router.get('/topRanked', (req, res) => {
     var playerCount = req.query.playerCount || 50;
     var pageNumber = req.query.pageNumber || 1;
     var type = req.query.type || "1v1";
@@ -13,7 +17,7 @@ router.get('/api/topRanked', (req, res) => {
         });
 });
 
-router.get('/api/searchPlayer', (req, res) => {
+router.get('/searchPlayer', (req, res) => {
     var playerID = req.query.player;
 
     if (playerID.match(/[a-zA-Z]/) != null) {
@@ -26,7 +30,7 @@ router.get('/api/searchPlayer', (req, res) => {
     }
 });
 
-router.get('/api/player', (req, res) => {
+router.get('/player', (req, res) => {
     var playerID = req.query.player;
     var playerObj;
     axios.get("https://api.brawlhalla.com/player/" + playerID + '/stats?api_key=' + brawlhallaAPIKey)
@@ -49,7 +53,7 @@ router.get('/api/player', (req, res) => {
         });
 });
 
-router.get('/api/players', (req, res) => {
+router.get('/players', (req, res) => {
     var playerIDs = req.query.players;
 
     //Define array promises
@@ -73,7 +77,7 @@ router.get('/api/players', (req, res) => {
         })
 });
 
-router.get('/api/clan', (req, res) => {
+router.get('/clan', (req, res) => {
     var clanID = req.query.clan;
     axios.get("https://api.brawlhalla.com/clan/" + clanID + '/?api_key=' + brawlhallaAPIKey)
         .then(axRes => {
